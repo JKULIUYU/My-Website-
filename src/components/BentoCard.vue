@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const props = defineProps({
+defineProps({
   hoverable: {
     type: Boolean,
     default: true
