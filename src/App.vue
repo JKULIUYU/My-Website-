@@ -30,27 +30,27 @@
           
           <nav class="flex flex-col gap-3 font-medium">
             <a @click.prevent="currentPage = 'home'" href="#" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer"
-              :class="currentPage === 'home' ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
+              :class="isActive('home') ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
               近期进展
             </a>
             <a @click.prevent="currentPage = 'projects'" href="#" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer"
-              :class="currentPage === 'projects' ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
+              :class="isActive('projects') ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
               我的项目
             </a>
             <a @click.prevent="currentPage = 'algorithms'" href="#" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer"
-              :class="currentPage === 'algorithms' ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
+              :class="isActive('algorithms') ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               底层算法
             </a>
             <a @click.prevent="currentPage = 'hardware'" href="#" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer"
-              :class="currentPage === 'hardware' ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
+              :class="isActive('hardware') ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
               硬件仓库
             </a>
             <a @click.prevent="currentPage = 'articles'" href="#" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer"
-              :class="currentPage === 'articles' ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
+              :class="isActive('articles') ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
               文章推荐
             </a>
@@ -195,7 +195,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, type Component } from 'vue'
 import BentoCard from './components/BentoCard.vue'
 import PageHome from './components/PageHome.vue'
 import PageProjects from './components/PageProjects.vue'
@@ -219,8 +219,16 @@ const handleBack = () => {
   }
 };
 
+// 检查页面是否处于激活状态（用于侧边栏类名判断，避开 TS 模板类型冲突）
+const isActive = (name: PageName) => {
+  if (name === 'algorithms') {
+    return currentPage.value === 'algorithms' || currentPage.value === 'algo_ai' || currentPage.value === 'algo_control';
+  }
+  return currentPage.value === name;
+};
+
 // 页面注册表：映射页面名称到对应的组件
-const pageRegistry: Record<PageName, any> = {
+const pageRegistry: Record<PageName, Component> = {
   home: PageHome,
   projects: PageProjects,
   algorithms: PageAlgorithms,
@@ -233,13 +241,6 @@ const pageRegistry: Record<PageName, any> = {
 // 当前应渲染的组件 (由 computed 自动追踪 currentPage 的变化)
 const currentPageComponent = computed(() => pageRegistry[currentPage.value]);
 
-// 当前组件需要的 props (只有 PageHome 需要 timeGreeting)
-const currentPageProps = computed(() => {
-  if (currentPage.value === 'home') {
-    return { timeGreeting: timeGreeting.value };
-  }
-  return {};
-});
 
 // ================= 主题切换控制 =================
 type ThemeMode = 'light' | 'dark' | 'auto';
@@ -440,8 +441,10 @@ const renderParticles = () => {
   canvasCtx.clearRect(0, 0, particleCanvas.value.width, particleCanvas.value.height);
   
   particles.forEach(p => {
-    p.update(particleCanvas.value.width, particleCanvas.value.height);
-    p.draw(canvasCtx!);
+    if (particleCanvas.value && canvasCtx) { // Add null check for canvasCtx
+      p.update(particleCanvas.value.width, particleCanvas.value.height);
+      p.draw(canvasCtx);
+    }
   });
 
   animationFrameId = requestAnimationFrame(renderParticles);
