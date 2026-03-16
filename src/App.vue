@@ -171,7 +171,7 @@
         <button 
           @click="applyTheme('auto')"
           class="flex items-center gap-2 px-3 py-2 rounded-full text-xs font-bold transition-colors duration-300"
-          :class="currentTheme === 'auto' ? 'bg-[var(--text-main)] text-white shadow-sm' : 'text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:hover:bg-white/5'"
+          :class="currentTheme === 'auto' ? 'bg-[var(--text-main)] text-white shadow-sm' : 'text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:text-[var(--text-main)]/80 dark:hover:text-white dark:hover:bg-white/10'"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           <span class="hidden sm:inline">Auto</span>
@@ -179,7 +179,7 @@
         <button 
           @click="applyTheme('light')"
           class="flex items-center gap-2 px-3 py-2 rounded-full text-xs font-bold transition-colors duration-300"
-          :class="currentTheme === 'light' ? 'bg-[var(--text-main)] text-white shadow-sm' : 'text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:hover:bg-white/5'"
+          :class="currentTheme === 'light' ? 'bg-[var(--text-main)] text-white shadow-sm' : 'text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:text-[var(--text-main)]/80 dark:hover:text-white dark:hover:bg-white/10'"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
           <span class="hidden sm:inline">Light</span>
@@ -187,7 +187,7 @@
         <button 
           @click="applyTheme('dark')"
           class="flex items-center gap-2 px-3 py-2 rounded-full text-xs font-bold transition-colors duration-300"
-          :class="currentTheme === 'dark' ? 'bg-[var(--text-main)] text-white shadow-sm' : 'text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:hover:bg-white/5'"
+          :class="currentTheme === 'dark' ? 'bg-[var(--text-main)] text-white shadow-sm' : 'text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-black/5 dark:text-[var(--text-main)]/80 dark:hover:text-white dark:hover:bg-white/10'"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
           <span class="hidden sm:inline">Dark</span>
@@ -202,7 +202,7 @@
           }"
         >
           <span
-            class="absolute -top-2 -right-2 min-w-[1.1rem] h-4 px-1 rounded-full bg-[var(--text-main)] text-white text-[10px] leading-4 text-center shadow"
+            class="absolute -top-2 -right-2 min-w-[1.1rem] h-4 px-1 rounded-full bg-[var(--text-main)] text-white text-[10px] leading-4 text-center shadow ring-1 ring-white/10 dark:bg-[var(--accent-color)] dark:text-[var(--text-main)] dark:ring-black/20"
           >
             {{ likeCount ?? '—' }}
           </span>
