@@ -242,14 +242,6 @@ const handleBack = () => {
   }
 };
 
-// 检查页面是否处于激活状态（用于侧边栏类名判断，避开 TS 模板类型冲突）
-const isActive = (name: PageName) => {
-  if (name === 'algorithms') {
-    return currentPage.value === 'algorithms' || currentPage.value === 'algo_ai' || currentPage.value === 'algo_control';
-  }
-  return currentPage.value === name;
-};
-
 // 页面注册表：映射页面名称到对应的组件
 const pageRegistry: Record<PageName, Component> = {
   home: PageHome,
