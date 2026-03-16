@@ -182,9 +182,17 @@
       <!-- ================= 浮动组件：互动点赞按钮 ================= -->
       <div 
         @click="triggerLike"
-        class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-12 h-12 bg-white/80 dark:bg-white/10 backdrop-blur-3xl rounded-full border border-[var(--card-border)] shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 active:scale-90"
-        :class="{'text-red-500': isLiked, 'text-[var(--text-muted)]': !isLiked}"
+        class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-12 h-12 bg-white/80 dark:bg-white/10 backdrop-blur-3xl rounded-full border border-[var(--card-border)] shadow-lg transition-all duration-300 hover:scale-110 active:scale-90 relative"
+        :class="{
+          'text-red-500 cursor-not-allowed': isLiked || likeBusy,
+          'text-[var(--text-muted)] cursor-pointer': !isLiked && !likeBusy
+        }"
       >
+        <span
+          class="absolute -top-2 -right-2 min-w-[1.25rem] h-5 px-1 rounded-full bg-[var(--text-main)] text-white text-[10px] leading-5 text-center shadow"
+        >
+          {{ likeCount ?? '—' }}
+        </span>
         <svg class="w-6 h-6 transition-all duration-500" :class="isLiked ? 'scale-110 fill-current' : 'fill-none stroke-current stroke-2'" viewBox="0 0 24 24">
           <path class="transition-all" stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
         </svg>
@@ -290,10 +298,62 @@ const applyTheme = (mode: ThemeMode) => {
 
 // ================= 点赞功能控制 =================
 const isLiked = ref(false);
-const triggerLike = () => {
-  isLiked.value = !isLiked.value;
-  // TODO: 后续接入统计 API
-}
+const likeCount = ref<number | null>(null);
+const likeBusy = ref(false);
+const likeError = ref('');
+const likeDeviceKey = 'like-device-id';
+
+const getDeviceId = () => {
+  let id = localStorage.getItem(likeDeviceKey);
+  if (!id) {
+    if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+      id = crypto.randomUUID();
+    } else {
+      id = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    }
+    localStorage.setItem(likeDeviceKey, id);
+  }
+  return id;
+};
+
+const fetchLikeStatus = async () => {
+  likeError.value = '';
+  try {
+    const deviceId = getDeviceId();
+    const resp = await fetch(`/api/like?deviceId=${encodeURIComponent(deviceId)}`, {
+      headers: { 'Accept': 'application/json' }
+    });
+    if (!resp.ok) throw new Error('like status failed');
+    const data = await resp.json();
+    likeCount.value = Number.isFinite(data?.count) ? data.count : 0;
+    isLiked.value = Boolean(data?.liked);
+  } catch (err) {
+    likeError.value = 'like status failed';
+    likeCount.value = likeCount.value ?? 0;
+  }
+};
+
+const triggerLike = async () => {
+  if (isLiked.value || likeBusy.value) return;
+  likeBusy.value = true;
+  likeError.value = '';
+  try {
+    const deviceId = getDeviceId();
+    const resp = await fetch('/api/like', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ deviceId }),
+    });
+    if (!resp.ok) throw new Error('like failed');
+    const data = await resp.json();
+    likeCount.value = Number.isFinite(data?.count) ? data.count : (likeCount.value ?? 0);
+    isLiked.value = Boolean(data?.liked);
+  } catch (err) {
+    likeError.value = 'like failed';
+  } finally {
+    likeBusy.value = false;
+  }
+};
 
 // ================= 动态数字时钟与问候语逻辑 =================
 const timeString = ref('00:00')
@@ -459,6 +519,9 @@ onMounted(() => {
   // 挂载并读取本地持久化主题设置
   const savedTheme = localStorage.getItem('theme-pref') as ThemeMode | null;
   applyTheme(savedTheme || 'auto');
+
+  // 初始化点赞状态
+  fetchLikeStatus();
 
   // 初始化 Canvas
   if (particleCanvas.value) {
