@@ -76,15 +76,15 @@ const isHover = ref(false)
   0% {
     transform: translate3d(0, 0, 0) scale(1);
   }
-  60% {
-    transform: translate3d(0, -6px, 0) scale(1.02);
+  55% {
+    transform: translate3d(0, -4px, 0) scale(1.01);
   }
   100% {
-    transform: translate3d(0, -4px, 0) scale(1.015);
+    transform: translate3d(0, -2px, 0) scale(1.008);
   }
 }
 
 .bento-bounce {
-  animation: bento-bounce 0.45s ease;
+  animation: bento-bounce 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 </style>

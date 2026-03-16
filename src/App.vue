@@ -135,10 +135,12 @@
         </BentoCard>
 
         <!-- 开发状态提示 -->
-        <BentoCard class="flex items-center gap-2 py-3">
-          <span class="w-2 h-2 rounded-full bg-[var(--accent-color)] shadow-sm"></span>
-          <div class="text-xs font-semibold text-[var(--accent-color)]/90 tracking-wide">
-            网站仍在开发中
+        <BentoCard class="flex items-center justify-center py-3">
+          <div class="flex items-center gap-2 justify-center w-full">
+            <span class="w-2 h-2 rounded-full bg-[var(--accent-color)] shadow-sm"></span>
+            <div class="text-xs font-semibold text-[var(--accent-color)]/90 tracking-wide text-center">
+              网站仍在开发中
+            </div>
           </div>
         </BentoCard>
       </div>
