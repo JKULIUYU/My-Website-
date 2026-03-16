@@ -1,11 +1,14 @@
 <template>
-  <div class="min-h-screen py-10 px-4 sm:px-8 xl:px-0 flex justify-center items-center relative overflow-hidden">
+  <div
+    class="min-h-screen py-10 px-4 sm:px-8 xl:px-0 flex justify-center relative"
+    :class="currentPage === 'home' ? 'items-center overflow-hidden' : 'items-start overflow-y-auto'"
+  >
     
     <!-- 全屏动态粒子特效 Canvas (z-index: 0 放于最底层) -->
     <canvas ref="particleCanvas" class="absolute inset-0 w-full h-full z-0 pointer-events-none"></canvas>
 
     <!-- 视图切换容器 -->
-    <Transition name="fade" mode="out-in">
+    <Transition name="page" mode="out-in">
       
       <!-- 主页：极简流线型网格主框架: 分为三列 (侧边栏、中枢区、右侧边栏) -->
       <main v-if="currentPage === 'home'" key="home" class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-4 gap-6 relative z-10">
@@ -150,16 +153,14 @@
       <div v-else key="subpage" class="w-full max-w-4xl mx-auto flex flex-col gap-6 relative z-10 pb-24">
         <!-- 返回键区域 -->
         <div class="flex items-center mb-2">
-          <button @click="currentPage = 'home'" class="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] hover:bg-white/60 dark:hover:bg-white/10 text-[var(--accent-color)] transition-all shadow-sm focus:outline-none backdrop-blur-md font-bold group">
+          <button @click="handleBack" class="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] hover:bg-white/60 dark:hover:bg-white/10 text-[var(--accent-color)] transition-all shadow-sm focus:outline-none backdrop-blur-md font-bold group">
             <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             返回主页
           </button>
         </div>
         
         <!-- 页面内容 -->
-        <Transition name="fade" mode="out-in">
-          <component :is="currentPageComponent" :key="currentPage" @open="currentPage = $event" @back="handleBack" />
-        </Transition>
+        <component :is="currentPageComponent" :key="currentPage" @open="currentPage = $event" @back="handleBack" />
       </div>
 
     </Transition>
@@ -227,16 +228,23 @@ import PageAlgoAI from './components/PageAlgoAI.vue'
 import PageAlgoControl from './components/PageAlgoControl.vue'
 import PageHardware from './components/PageHardware.vue'
 import PageArticles from './components/PageArticles.vue'
+import PageProjectMotor from './components/PageProjectMotor.vue'
 import avatarImg from './assets/avatar.png'
 
 // ================= 页面导航状态 =================
-type PageName = 'home' | 'projects' | 'algorithms' | 'hardware' | 'articles' | 'algo_ai' | 'algo_control';
+type PageName = 'home' | 'projects' | 'algorithms' | 'hardware' | 'articles' | 'algo_ai' | 'algo_control' | 'project_motor';
 const currentPage = ref<PageName>('home');
 
 // 处理子页面返回逻辑
 const handleBack = () => {
+  if (window.history.length > 1) {
+    window.history.back();
+    return;
+  }
   if (currentPage.value === 'algo_ai' || currentPage.value === 'algo_control') {
     currentPage.value = 'algorithms';
+  } else if (currentPage.value === 'project_motor') {
+    currentPage.value = 'projects';
   } else {
     currentPage.value = 'home';
   }
@@ -251,23 +259,31 @@ const pageRegistry: Record<PageName, Component> = {
   algo_control: PageAlgoControl,
   hardware: PageHardware,
   articles: PageArticles,
+  project_motor: PageProjectMotor,
 };
 
 // 当前应渲染的组件 (由 computed 自动追踪 currentPage 的变化)
 const currentPageComponent = computed(() => pageRegistry[currentPage.value]);
 
 // ================= 浏览器历史记录支持 =================
+const pageToHash = (page: PageName) => {
+  if (page === 'project_motor') return '#/projects/project_motor';
+  return page === 'home' ? '' : `#/${page}`;
+};
+
 const syncUrlWithPage = (page: PageName) => {
   const base = window.location.origin + window.location.pathname;
-  const next = page === 'home' ? base : `${base}#/${page}`;
+  const next = page === 'home' ? base : `${base}${pageToHash(page)}`;
   window.history.pushState({ page }, '', next);
 };
 
 const readPageFromUrl = (): PageName => {
   const hash = window.location.hash.replace('#/', '').trim();
+  if (!hash) return 'home';
   if (hash === 'projects' || hash === 'algorithms' || hash === 'hardware' || hash === 'articles' || hash === 'algo_ai' || hash === 'algo_control') {
     return hash as PageName;
   }
+  if (hash === 'projects/project_motor') return 'project_motor';
   return 'home';
 };
 const isHistoryNavigating = ref(false);
