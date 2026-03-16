@@ -29,30 +29,25 @@
           <div class="text-xs font-bold text-[var(--text-muted)] tracking-widest mb-4">GENERAL</div>
           
           <nav class="flex flex-col gap-3 font-medium">
-            <a @click.prevent="currentPage = 'home'" href="#" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer"
-              :class="isActive('home') ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
+            <a @click.prevent="currentPage = 'home'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-              近期进展
+              <span class="transition-all duration-300 group-hover:text-[var(--accent-color)] group-hover:tracking-wide">近期进展</span>
             </a>
-            <a @click.prevent="currentPage = 'projects'" href="#" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer"
-              :class="isActive('projects') ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
+            <a @click.prevent="currentPage = 'projects'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-              我的项目
+              <span class="transition-all duration-300 group-hover:text-[var(--accent-color)] group-hover:tracking-wide">我的项目</span>
             </a>
-            <a @click.prevent="currentPage = 'algorithms'" href="#" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer"
-              :class="isActive('algorithms') ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
+            <a @click.prevent="currentPage = 'algorithms'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              底层算法
+              <span class="transition-all duration-300 group-hover:text-[var(--accent-color)] group-hover:tracking-wide">底层算法</span>
             </a>
-            <a @click.prevent="currentPage = 'hardware'" href="#" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer"
-              :class="isActive('hardware') ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
+            <a @click.prevent="currentPage = 'hardware'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
-              硬件仓库
+              <span class="transition-all duration-300 group-hover:text-[var(--accent-color)] group-hover:tracking-wide">硬件仓库</span>
             </a>
-            <a @click.prevent="currentPage = 'articles'" href="#" class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer"
-              :class="isActive('articles') ? 'bg-white/70 text-[var(--accent-color)] shadow-sm font-semibold' : 'text-[var(--text-muted)] hover:bg-white/40'">
+            <a @click.prevent="currentPage = 'articles'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-              文章推荐
+              <span class="transition-all duration-300 group-hover:text-[var(--accent-color)] group-hover:tracking-wide">文章推荐</span>
             </a>
           </nav>
         </BentoCard>
@@ -130,6 +125,14 @@
              <svg class="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
            </div>
         </BentoCard>
+
+        <!-- 今日代码短句 -->
+        <BentoCard class="flex flex-col gap-2">
+          <div class="text-xs font-semibold text-[var(--text-muted)] tracking-widest">CODE QUOTE</div>
+          <div class="text-sm font-semibold text-[var(--text-main)] leading-relaxed">
+            {{ dailyCodeQuote }}
+          </div>
+        </BentoCard>
       </div>
       </main>
 
@@ -151,8 +154,10 @@
 
     </Transition>
 
-    <!-- ================= 浮动组件：莫兰迪主题切换器 ================= -->
-      <div class="fixed bottom-6 left-6 z-50 flex items-center bg-[var(--card-bg)] backdrop-blur-3xl p-1.5 rounded-full border border-[var(--card-border)] shadow-lg transition-all duration-300 hover:shadow-xl">
+    <!-- ================= 浮动组件容器：固定在视口四角 ================= -->
+    <div class="fixed inset-0 z-50 pointer-events-none">
+      <!-- ================= 浮动组件：莫兰迪主题切换器 ================= -->
+      <div class="absolute bottom-6 left-6 flex items-center gap-2 bg-[var(--card-bg)] backdrop-blur-3xl p-1.5 rounded-full border border-[var(--card-border)] shadow-lg transition-all duration-300 hover:shadow-xl pointer-events-auto">
         <button 
           @click="applyTheme('auto')"
           class="flex items-center gap-2 px-3 py-2 rounded-full text-xs font-bold transition-colors duration-300"
@@ -177,26 +182,26 @@
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
           <span class="hidden sm:inline">Dark</span>
         </button>
-      </div>
-
-      <!-- ================= 浮动组件：互动点赞按钮 ================= -->
-      <div 
-        @click="triggerLike"
-        class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-12 h-12 bg-white/80 dark:bg-white/10 backdrop-blur-3xl rounded-full border border-[var(--card-border)] shadow-lg transition-all duration-300 hover:scale-110 active:scale-90 relative"
-        :class="{
-          'text-red-500 cursor-not-allowed': isLiked || likeBusy,
-          'text-[var(--text-muted)] cursor-pointer': !isLiked && !likeBusy
-        }"
-      >
-        <span
-          class="absolute -top-2 -right-2 min-w-[1.25rem] h-5 px-1 rounded-full bg-[var(--text-main)] text-white text-[10px] leading-5 text-center shadow"
+        <!-- ================= 浮动组件：互动点赞按钮 ================= -->
+        <div 
+          @click="triggerLike"
+          class="flex items-center justify-center w-10 h-10 bg-white/80 dark:bg-white/10 backdrop-blur-3xl rounded-full border border-[var(--card-border)] shadow-lg transition-all duration-300 hover:scale-110 active:scale-90 relative pointer-events-auto"
+          :class="{
+            'text-red-500 cursor-not-allowed': isLiked || likeBusy,
+            'text-[var(--text-muted)] cursor-pointer': !isLiked && !likeBusy
+          }"
         >
-          {{ likeCount ?? '—' }}
-        </span>
-        <svg class="w-6 h-6 transition-all duration-500" :class="isLiked ? 'scale-110 fill-current' : 'fill-none stroke-current stroke-2'" viewBox="0 0 24 24">
-          <path class="transition-all" stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-        </svg>
+          <span
+            class="absolute -top-2 -right-2 min-w-[1.1rem] h-4 px-1 rounded-full bg-[var(--text-main)] text-white text-[10px] leading-4 text-center shadow"
+          >
+            {{ likeCount ?? '—' }}
+          </span>
+          <svg class="w-5 h-5 transition-all duration-500" :class="isLiked ? 'scale-110 fill-current' : 'fill-none stroke-current stroke-2'" viewBox="0 0 24 24">
+            <path class="transition-all" stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+          </svg>
+        </div>
       </div>
+    </div>
 
     <!-- (End of floating components. Main layout closed earlier) -->
   </div>
@@ -354,6 +359,35 @@ const triggerLike = async () => {
     likeBusy.value = false;
   }
 };
+
+// ================= 每日代码短句 =================
+const codeQuotes = [
+  '编译通过不是结束，是 Bug 的开场。',
+  '写完再改，是最稳定的 PR 文化。',
+  '我不是在写代码，我是在和未来的自己和解。',
+  '这段逻辑很清晰，直到它上线。',
+  '代码能跑就行，但它为什么能跑？',
+  '把 TODO 写成诗，是工程师的浪漫。',
+  '我给函数取名，是为了让它别生气。',
+  '调试不是找错，是在考古。',
+  '“只改一行”是最危险的承诺。',
+  '今天的我写代码，明天的我写注释。',
+];
+
+const hashString = (value: string) => {
+  let hash = 0;
+  for (let i = 0; i < value.length; i += 1) {
+    hash = (hash * 31 + value.charCodeAt(i)) | 0;
+  }
+  return Math.abs(hash);
+};
+
+const dailyCodeQuote = computed(() => {
+  const now = new Date();
+  const key = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+  const index = hashString(key) % codeQuotes.length;
+  return codeQuotes[index];
+});
 
 // ================= 动态数字时钟与问候语逻辑 =================
 const timeString = ref('00:00')
