@@ -6,8 +6,8 @@
     使用 GPU 加速（will-change + translate3d）确保 60fps 流畅渲染。
   -->
   <div 
-    class="relative overflow-hidden rounded-4xl backdrop-blur-3xl group cursor-pointer"
-    :class="[paddingClass]"
+    class="relative overflow-hidden rounded-4xl backdrop-blur-3xl group cursor-pointer bento-card"
+    :class="[paddingClass, isHover ? 'bento-bounce' : '']"
     :style="{
       backgroundColor: 'var(--card-bg)',
       border: '1px solid var(--card-border)',
@@ -70,3 +70,21 @@ defineProps({
 
 const isHover = ref(false)
 </script>
+
+<style scoped>
+@keyframes bento-bounce {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  60% {
+    transform: translate3d(0, -6px, 0) scale(1.02);
+  }
+  100% {
+    transform: translate3d(0, -4px, 0) scale(1.015);
+  }
+}
+
+.bento-bounce {
+  animation: bento-bounce 0.45s ease;
+}
+</style>
