@@ -1,16 +1,23 @@
 <template>
   <!-- 我的项目：四大硬核项目展示 -->
   <div class="flex flex-col gap-6">
-    <BentoCard>
-      <div class="text-xs text-[var(--text-muted)] tracking-widest font-bold mb-6">MY PROJECTS</div>
-      <h2 class="text-2xl font-black text-[var(--text-main)] mb-2">项目档案馆</h2>
-      <p class="text-sm text-[var(--text-muted)] leading-relaxed">从 PID 控制到深度学习模型，从 PCB 绘制到 ROS2 节点架构。这里收录了我在嵌入式、算法与硬件方向的核心实战项目。</p>
-    </BentoCard>
+      <BentoCard>
+        <div class="text-xs text-[var(--text-muted)] tracking-widest font-bold mb-6">MY PROJECTS</div>
+        <h2 class="text-2xl font-black text-[var(--text-main)] mb-2">项目档案馆</h2>
+        <p class="text-sm text-[var(--text-muted)] leading-relaxed">从 PID 控制到深度学习模型，从 PCB 绘制到 ROS2 节点架构。这里收录了我在嵌入式、算法与硬件方向的核心实战项目。</p>
+      </BentoCard>
 
     <!-- 项目卡片网格 -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- 项目1: 教育机器人 -->
-      <BentoCard>
+      <button
+        type="button"
+        @pointerdown="openMotor"
+        @click="openMotor"
+        @keydown.enter.prevent="openMotor"
+        class="block outline-none text-left"
+      >
+        <BentoCard :pulse="isMotorPulse">
         <div class="flex items-center gap-3 mb-4">
           <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center font-bold text-sm">P1</div>
           <div>
@@ -18,13 +25,18 @@
             <div class="text-[10px] text-[var(--text-muted)]">2025 寒假</div>
           </div>
         </div>
-        <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">基于 PY32F002 主控与有刷磁编码器电机，实现完整的 PID 闭环控制算法，精确控制电机速度与转动角度。通过创客网站的可视化编程接口驱动。</p>
+        <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">
+          公司项目（未开源）。我主要负责速度/位置 PID 控制模块与参数整定，并针对低成本磁编码器的精度波动做了多圈位置精度保障：
+          多圈脉冲累计、速度/圈数动态补偿、必要时的基准点校准思路、双环控制与轻量滤波/异常脉冲剔除、积分与输出限幅。
+        </p>
         <div class="flex flex-wrap gap-1.5">
           <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">PID</span>
           <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">PY32F002</span>
           <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">编码器电机</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/20 text-[var(--text-muted)] font-medium">Private</span>
         </div>
-      </BentoCard>
+        </BentoCard>
+      </button>
 
       <!-- 项目2: 阿克曼小车 -->
       <BentoCard>
@@ -83,5 +95,27 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import BentoCard from './BentoCard.vue'
+
+const emit = defineEmits<{
+  (e: 'open', page: string): void
+}>()
+
+const isMotorOpening = ref(false)
+const isMotorPulse = ref(false)
+
+const openMotor = () => {
+  if (isMotorOpening.value) return
+  // 先触发一次“点击脉冲”，再进入详情
+  isMotorOpening.value = true
+  isMotorPulse.value = false
+  requestAnimationFrame(() => {
+    isMotorPulse.value = true
+  })
+  setTimeout(() => {
+    isMotorPulse.value = false
+    emit('open', 'project_motor')
+  }, 220)
+}
 </script>
