@@ -132,6 +132,10 @@
           <div class="text-sm font-semibold text-[var(--text-main)] leading-relaxed">
             {{ dailyCodeQuote }}
           </div>
+          <div class="text-[11px] font-semibold text-[var(--accent-color)]/90 tracking-wide flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-color)] shadow-sm"></span>
+            网站正在开发中
+          </div>
         </BentoCard>
       </div>
       </main>
@@ -208,7 +212,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed, type Component } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch, type Component } from 'vue'
 import BentoCard from './components/BentoCard.vue'
 import PageHome from './components/PageHome.vue'
 import PageProjects from './components/PageProjects.vue'
@@ -254,6 +258,25 @@ const pageRegistry: Record<PageName, Component> = {
 // 当前应渲染的组件 (由 computed 自动追踪 currentPage 的变化)
 const currentPageComponent = computed(() => pageRegistry[currentPage.value]);
 
+// ================= 浏览器历史记录支持 =================
+const syncUrlWithPage = (page: PageName) => {
+  const base = window.location.origin + window.location.pathname;
+  const next = page === 'home' ? base : `${base}#/${page}`;
+  window.history.pushState({ page }, '', next);
+};
+
+const readPageFromUrl = (): PageName => {
+  const hash = window.location.hash.replace('#/', '').trim();
+  if (hash === 'projects' || hash === 'algorithms' || hash === 'hardware' || hash === 'articles' || hash === 'algo_ai' || hash === 'algo_control') {
+    return hash as PageName;
+  }
+  return 'home';
+};
+const isHistoryNavigating = ref(false);
+const handlePopstate = () => {
+  isHistoryNavigating.value = true;
+  currentPage.value = readPageFromUrl();
+};
 
 // ================= 主题切换控制 =================
 type ThemeMode = 'light' | 'dark' | 'auto';
@@ -546,6 +569,9 @@ const renderParticles = () => {
 
 // ================= 生命周期钩子 =================
 onMounted(() => {
+  // 初始化当前页面（支持刷新/直达 hash）
+  currentPage.value = readPageFromUrl();
+
   // 挂载时钟
   updateTime()
   timer = setInterval(updateTime, 1000)
@@ -568,6 +594,9 @@ onMounted(() => {
       initParticles();
     });
   }
+
+  // 监听浏览器返回/前进
+  window.addEventListener('popstate', handlePopstate);
 })
 
 onUnmounted(() => {
@@ -575,5 +604,14 @@ onUnmounted(() => {
   if (themeAutoInterval) clearInterval(themeAutoInterval);
   cancelAnimationFrame(animationFrameId);
   window.removeEventListener('resize', resizeCanvas);
+  window.removeEventListener('popstate', handlePopstate);
 })
+
+watch(currentPage, (next, prev) => {
+  if (isHistoryNavigating.value) {
+    isHistoryNavigating.value = false;
+    return;
+  }
+  if (next !== prev) syncUrlWithPage(next);
+});
 </script>
