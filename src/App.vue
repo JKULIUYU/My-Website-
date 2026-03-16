@@ -132,9 +132,13 @@
           <div class="text-sm font-semibold text-[var(--text-main)] leading-relaxed">
             {{ dailyCodeQuote }}
           </div>
-          <div class="text-[11px] font-semibold text-[var(--accent-color)]/90 tracking-wide flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-color)] shadow-sm"></span>
-            网站正在开发中
+        </BentoCard>
+
+        <!-- 开发状态提示 -->
+        <BentoCard class="flex items-center gap-2 py-3">
+          <span class="w-2 h-2 rounded-full bg-[var(--accent-color)] shadow-sm"></span>
+          <div class="text-xs font-semibold text-[var(--accent-color)]/90 tracking-wide">
+            网站仍在开发中
           </div>
         </BentoCard>
       </div>
