@@ -415,18 +415,26 @@ const codeQuotes = [
   '今天的我写代码，明天的我写注释。',
 ];
 
-const hashString = (value: string) => {
-  let hash = 0;
-  for (let i = 0; i < value.length; i += 1) {
-    hash = (hash * 31 + value.charCodeAt(i)) | 0;
-  }
-  return Math.abs(hash);
+const getDayOfYear = (date: Date) => {
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff = date.getTime() - start.getTime();
+  const oneDay = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / oneDay);
 };
 
 const dailyCodeQuote = computed(() => {
   const now = new Date();
-  const key = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
-  const index = hashString(key) % codeQuotes.length;
+  const dayIndex = getDayOfYear(now);
+  let index = dayIndex % codeQuotes.length;
+
+  // 保证与昨天不重复（除非只有 1 条）
+  if (codeQuotes.length > 1) {
+    const yesterdayIndex = (dayIndex - 1 + codeQuotes.length) % codeQuotes.length;
+    if (index === yesterdayIndex) {
+      index = (index + 1) % codeQuotes.length;
+    }
+  }
+
   return codeQuotes[index];
 });
 
