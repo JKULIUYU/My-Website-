@@ -16,14 +16,14 @@
       backgroundColor: 'var(--card-bg)',
       border: '1px solid var(--card-border)',
       boxShadow: 'var(--card-shadow)',
-      /* GPU 加速: 提前告知浏览器即将变化的属性，分配独立合成层 */
-      willChange: 'transform, box-shadow',
+      /* 只在活跃阶段启用 will-change，减少合成层常驻开销 */
+      willChange: isActiveAnim ? 'transform' : 'auto',
       /* 使用 translate3d 强制开启硬件加速确保 60fps */
       transform: (isHover || props.forceHover) ? 'translate3d(0, -4px, 0) scale(1.015)' : 'translate3d(0, 0, 0) scale(1)',
-      transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+      transition: 'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1)',
     }"
-    @mouseenter="isHover = true"
-    @mouseleave="isHover = false"
+    @mouseenter="setHover(true)"
+    @mouseleave="setHover(false)"
   >
     <!-- macOS 风格的内表面光反射高光层 -->
     <div 
@@ -39,9 +39,9 @@
     <div 
       class="relative z-10 w-full h-full flex flex-col"
       :style="{
-        willChange: hoverable ? 'transform' : 'auto',
+        willChange: isActiveAnim && hoverable ? 'transform' : 'auto',
         transform: ((isHover || props.forceHover) && hoverable) ? 'translate3d(0, -2px, 0) scale(1.02)' : 'translate3d(0, 0, 0) scale(1)',
-        transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+        transition: 'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)',
       }"
     >
       <slot></slot>
@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, onUnmounted, ref } from 'vue'
 
 const props = defineProps({
   hoverable: {
@@ -81,6 +81,20 @@ const props = defineProps({
 })
 
 const isHover = ref(false)
+const isActiveAnim = computed(() => isHover.value || props.forceHover || props.pulse)
+let hoverRaf = 0
+
+const setHover = (value: boolean) => {
+  if (hoverRaf) cancelAnimationFrame(hoverRaf)
+  hoverRaf = requestAnimationFrame(() => {
+    isHover.value = value
+    hoverRaf = 0
+  })
+}
+
+onUnmounted(() => {
+  if (hoverRaf) cancelAnimationFrame(hoverRaf)
+})
 </script>
 
 <style scoped>
@@ -104,8 +118,11 @@ const isHover = ref(false)
   0% {
     transform: translate3d(0, 0, 0) scale(1);
   }
-  40% {
-    transform: translate3d(0, -3px, 0) scale(1.01);
+  42% {
+    transform: translate3d(0, -6px, 0) scale(1.016);
+  }
+  74% {
+    transform: translate3d(0, -3px, 0) scale(1.0115);
   }
   100% {
     transform: translate3d(0, -4px, 0) scale(1.015);
@@ -113,6 +130,10 @@ const isHover = ref(false)
 }
 
 .bento-pulse {
-  animation: bento-pulse 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: bento-pulse 0.48s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card {
+  contain: paint;
 }
 </style>

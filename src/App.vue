@@ -159,8 +159,14 @@
           </button>
         </div>
         
-        <!-- 页面内容（移除内层 mode=out-in 过渡，避免首次切换偶发空白） -->
-        <component :is="currentPageComponent" :key="currentPage" @open="currentPage = $event" @back="handleBack" />
+        <!-- 页面内容：保留子页面内部过渡，但不用 out-in，避免首次空白 -->
+        <div class="subpage-panel-stage">
+          <Transition name="subpage-panel">
+            <div :key="currentPage" class="subpage-panel-item">
+              <component :is="currentPageComponent" @open="currentPage = $event" @back="handleBack" />
+            </div>
+          </Transition>
+        </div>
       </div>
 
     </Transition>

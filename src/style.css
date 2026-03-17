@@ -117,16 +117,80 @@ body {
 .page-leave-active {
   transition: opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-              filter 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+              filter 0.14s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform, filter;
 }
 .page-enter-from {
   opacity: 0;
   transform: translateY(14px) scale(0.992);
-  filter: blur(2px);
+  filter: blur(1px);
 }
 .page-leave-to {
   opacity: 0;
   transform: translateY(-10px) scale(0.995);
-  filter: blur(2px);
+  filter: blur(0.6px);
+}
+
+.perf-canvas {
+  contain: strict;
+}
+
+.perf-floating {
+  contain: layout style paint;
+}
+
+.perf-content {
+  contain: layout paint;
+}
+
+/* ====== 子页面内部切换（项目列表 <-> 详情） ====== */
+.subpage-panel-stage {
+  position: relative;
+  min-height: 1px;
+}
+
+.subpage-panel-item {
+  width: 100%;
+}
+
+.subpage-panel-enter-active,
+.subpage-panel-leave-active {
+  will-change: opacity, transform;
+}
+
+.subpage-panel-enter-active {
+  animation: subpage-panel-in 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.subpage-panel-leave-active {
+  animation: subpage-panel-out 0.52s cubic-bezier(0.16, 1, 0.3, 1) both;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+@keyframes subpage-panel-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(0.98);
+  }
+  68% {
+    opacity: 1;
+    transform: translate3d(0, -2px, 0) scale(1.003);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes subpage-panel-out {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0) scale(0.992);
+  }
 }

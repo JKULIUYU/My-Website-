@@ -126,7 +126,7 @@ const emit = defineEmits<{
 type ProjectPulse = 'motor' | 'ackermann' | 'devboard' | null
 const activePulse = ref<ProjectPulse>(null)
 let openTimer: ReturnType<typeof setTimeout> | null = null
-const CARD_OPEN_DELAY = 280
+const CARD_OPEN_DELAY = 180
 
 const openWithPulse = (pulse: Exclude<ProjectPulse, null>, page: string) => {
   if (openTimer) {

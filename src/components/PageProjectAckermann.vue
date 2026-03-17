@@ -116,15 +116,15 @@
         <div class="p-3 rounded-2xl bg-white/5 border border-[var(--card-border)]">
           <div class="text-xs font-semibold text-[var(--text-main)] mb-2">主控 PCB（正面 / 反面）</div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <img :src="mainTopImg" alt="Main PCB top" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
-            <img :src="mainBottomImg" alt="Main PCB bottom" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
+            <img :src="mainTopImg" alt="Main PCB top" width="1467" height="1007" loading="lazy" decoding="async" fetchpriority="low" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
+            <img :src="mainBottomImg" alt="Main PCB bottom" width="1326" height="855" loading="lazy" decoding="async" fetchpriority="low" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
           </div>
         </div>
         <div class="p-3 rounded-2xl bg-white/5 border border-[var(--card-border)]">
           <div class="text-xs font-semibold text-[var(--text-main)] mb-2">遥控 PCB（正面 / 反面）</div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <img :src="remoteTopImg" alt="Remote PCB top" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
-            <img :src="remoteBottomImg" alt="Remote PCB bottom" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
+            <img :src="remoteTopImg" alt="Remote PCB top" width="1247" height="771" loading="lazy" decoding="async" fetchpriority="low" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
+            <img :src="remoteBottomImg" alt="Remote PCB bottom" width="1378" height="839" loading="lazy" decoding="async" fetchpriority="low" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
           </div>
         </div>
       </div>

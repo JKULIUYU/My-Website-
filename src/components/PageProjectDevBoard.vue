@@ -67,8 +67,8 @@
     <BentoCard>
       <div class="text-xs text-[var(--text-muted)] tracking-widest font-bold mb-4">PCB RENDERS</div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <img :src="pcbFront" alt="Dev board PCB 1" class="w-full rounded-2xl border border-[var(--card-border)] object-cover" />
-        <img :src="pcbBack" alt="Dev board PCB 2" class="w-full rounded-2xl border border-[var(--card-border)] object-cover" />
+        <img :src="pcbFront" alt="Dev board PCB 1" width="1226" height="948" loading="lazy" decoding="async" fetchpriority="low" class="w-full rounded-2xl border border-[var(--card-border)] object-cover" />
+        <img :src="pcbBack" alt="Dev board PCB 2" width="1062" height="971" loading="lazy" decoding="async" fetchpriority="low" class="w-full rounded-2xl border border-[var(--card-border)] object-cover" />
       </div>
     </BentoCard>
   </div>
