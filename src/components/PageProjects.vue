@@ -70,21 +70,32 @@
       </button>
 
       <!-- 项目3: 少儿编程板 -->
-      <BentoCard>
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 flex items-center justify-center font-bold text-sm">P3</div>
-          <div>
-            <div class="font-bold text-sm text-[var(--text-main)]">少儿编程开发板</div>
-            <div class="text-[10px] text-[var(--text-muted)]">2026 寒假</div>
+      <button
+        type="button"
+        @pointerdown="openDevBoard"
+        @click="openDevBoard"
+        @keydown.enter.prevent="openDevBoard"
+        class="block outline-none text-left"
+      >
+        <BentoCard :pulse="isDevBoardPulse">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 flex items-center justify-center font-bold text-sm">P3</div>
+            <div>
+              <div class="font-bold text-sm text-[var(--text-main)]">少儿编程开发板</div>
+              <div class="text-[10px] text-[var(--text-muted)]">2026 寒假</div>
+            </div>
           </div>
-        </div>
-        <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">基于 AIR001 (PY32F002) 的教育开发板。集成 RGB 灯阵、触碰感应（PCB 铜皮外露 + ADC 电压变化检测）、光敏传感器与蜂鸣器。负责 PCB 绘制与驱动代码。</p>
-        <div class="flex flex-wrap gap-1.5">
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">AIR001</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">PCB Layout</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">ADC</span>
-        </div>
-      </BentoCard>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">
+            教学向 USB-C 开发板，集成自动下载与多种传感/交互模块。主要负责 PCB 设计与 Layout。
+          </p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">USB-C</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">CH340K</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">PCB Layout</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/20 text-[var(--text-muted)] font-medium">Private</span>
+          </div>
+        </BentoCard>
+      </button>
 
       <!-- 项目4: 肌电灵巧手 (重点) -->
       <BentoCard>
@@ -119,6 +130,8 @@ const isMotorOpening = ref(false)
 const isMotorPulse = ref(false)
 const isAckermannOpening = ref(false)
 const isAckermannPulse = ref(false)
+const isDevBoardOpening = ref(false)
+const isDevBoardPulse = ref(false)
 
 const openMotor = () => {
   if (isMotorOpening.value) return
@@ -144,6 +157,19 @@ const openAckermann = () => {
   setTimeout(() => {
     isAckermannPulse.value = false
     emit('open', 'project_ackermann')
+  }, 220)
+}
+
+const openDevBoard = () => {
+  if (isDevBoardOpening.value) return
+  isDevBoardOpening.value = true
+  isDevBoardPulse.value = false
+  requestAnimationFrame(() => {
+    isDevBoardPulse.value = true
+  })
+  setTimeout(() => {
+    isDevBoardPulse.value = false
+    emit('open', 'project_devboard')
   }, 220)
 }
 </script>

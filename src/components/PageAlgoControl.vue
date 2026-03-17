@@ -42,6 +42,19 @@
         </BentoCard>
       </a>
 
+      <!-- PID Article (CSDN) -->
+      <a href="https://blog.csdn.net/qq_58114029/article/details/136780577" target="_blank" class="block outline-none">
+        <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
+          <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">CLASSIC CONTROL</div>
+          <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">PID 算法学习笔记</div>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">结合速度环与位置环的讲解，适合入门与快速上手。</p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">PID</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">CSDN</span>
+          </div>
+        </BentoCard>
+      </a>
+
       <!-- Model Predictive Control -->
       <a href="https://zhuanlan.zhihu.com/p/99307739" target="_blank" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
@@ -90,6 +103,32 @@
           <div class="flex flex-wrap gap-1.5 mt-auto">
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">自适应控制</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">MRAC</span>
+          </div>
+        </BentoCard>
+      </a>
+
+      <!-- Adaptive Kalman Filter -->
+      <a href="https://blog.csdn.net/weixin_41197108/article/details/116224563" target="_blank" class="block outline-none">
+        <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
+          <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">ADVANCED ESTIMATION</div>
+          <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">自适应卡尔曼滤波入门</div>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">结合噪声统计的在线估计，改进传统 KF 在模型失配与噪声变化场景下的鲁棒性。</p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">Adaptive KF</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">Noise</span>
+          </div>
+        </BentoCard>
+      </a>
+
+      <!-- Schmitt Trigger -->
+      <a href="https://blog.csdn.net/Quarx/article/details/103811089" target="_blank" class="block outline-none">
+        <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
+          <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">ENGINEERING TRICKS</div>
+          <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">施密特触发器的抗抖与迟滞原理</div>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">讲清迟滞比较器的结构与阈值设计，常用于传感器噪声抑制与边沿整形。</p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">Schmitt</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">Filter</span>
           </div>
         </BentoCard>
       </a>

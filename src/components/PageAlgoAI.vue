@@ -94,6 +94,71 @@
         </BentoCard>
       </a>
 
+      <!-- Decision Tree -->
+      <a href="https://blog.csdn.net/qq_41931764/article/details/103181792" target="_blank" class="block outline-none">
+        <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
+          <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">CLASSIC ML</div>
+          <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">决策树算法原理详解</div>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">从 ID3、C4.5 到 CART，系统梳理决策树的划分策略、信息增益与剪枝思路。</p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">Decision Tree</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">CART</span>
+          </div>
+        </BentoCard>
+      </a>
+
+      <!-- Markov Random Field -->
+      <a href="https://blog.csdn.net/aptx704610875/article/details/106173714" target="_blank" class="block outline-none">
+        <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
+          <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">PROBABILISTIC MODEL</div>
+          <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">马尔可夫链 / 随机过程入门</div>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">从状态转移与马尔可夫性出发，建立随机过程建模的基础概念。</p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">Markov</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">随机过程</span>
+          </div>
+        </BentoCard>
+      </a>
+
+      <!-- Simulated Annealing -->
+      <a href="https://blog.csdn.net/qq_41194196/article/details/126111335" target="_blank" class="block outline-none">
+        <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
+          <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">OPTIMIZATION</div>
+          <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">模拟退火算法介绍与实例</div>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">从物理退火到组合优化，解释温度、状态与 Metropolis 接受准则的核心思想。</p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">SA</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">Optimization</span>
+          </div>
+        </BentoCard>
+      </a>
+
+      <!-- TOPSIS -->
+      <a href="https://blog.csdn.net/m0_55903362/article/details/132917440" target="_blank" class="block outline-none">
+        <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
+          <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">MODELING</div>
+          <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">TOPSIS 综合评价方法</div>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">从数据正向化到评分构建，完整介绍 TOPSIS 的评价流程与权重处理方法。</p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">TOPSIS</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">Modeling</span>
+          </div>
+        </BentoCard>
+      </a>
+
+      <!-- Li Mu DL Course -->
+      <a href="https://www.bilibili.com/video/BV15UREYsEN8/" target="_blank" class="block outline-none">
+        <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
+          <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">DEEP LEARNING</div>
+          <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">李沐：动手学深度学习</div>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">系统覆盖感知机、MLP、CNN、RNN、Attention 与 Transformer 的经典课程。</p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">视频</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">课程</span>
+          </div>
+        </BentoCard>
+      </a>
+
     </div>
   </div>
 </template>

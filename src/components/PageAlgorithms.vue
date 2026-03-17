@@ -9,6 +9,13 @@
       </p>
     </BentoCard>
 
+    <LearningPathTimeline
+      title="算法学习路径"
+      subtitle="从基础算法到控制与深度学习，形成体系化的自学路线。"
+      badge="Algorithm Track"
+      :items="algorithmTimeline"
+    />
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       
       <!-- AI / ML Folder -->
@@ -56,11 +63,89 @@
       </a>
 
     </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <a href="https://space.bilibili.com/8888480" target="_blank" class="block outline-none">
+        <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
+          <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">FOUNDATION</div>
+          <div class="font-bold text-sm text-[var(--text-main)] mb-2">左程云：算法与数据结构</div>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">基础算法与数据结构体系课，适合作为入门主线与刷题框架。</p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">视频</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">算法基础</span>
+          </div>
+        </BentoCard>
+      </a>
+
+      <a href="https://space.bilibili.com/231911980" target="_blank" class="block outline-none">
+        <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
+          <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">FOUNDATION</div>
+          <div class="font-bold text-sm text-[var(--text-main)] mb-2">Erikse：算法与数据结构</div>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">补充式算法讲解与题型归纳，适合做知识回顾与查漏补缺。</p>
+          <div class="flex flex-wrap gap-1.5 mt-auto">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">视频</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--text-main)]/5 text-[var(--text-muted)]">数据结构</span>
+          </div>
+        </BentoCard>
+      </a>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import BentoCard from './BentoCard.vue'
+import LearningPathTimeline from './LearningPathTimeline.vue'
 
 defineEmits(['open'])
+
+const algorithmTimeline = [
+  {
+    period: '2024.7–2024.12',
+    title: '基础算法与数据结构',
+    points: [
+      'C/C++ 基础算法、排序与数据结构',
+      'DFS / BFS、并查集、动态规划（背包）',
+      '单调队列、优先队列、哈希表',
+    ],
+    tags: ['C/C++', 'DFS', 'DP'],
+  },
+  {
+    period: '2025.1–2025.3',
+    title: '控制算法入门',
+    points: [
+      'PID 控制入门',
+      '速度环 / 位置环 / 多环控制',
+    ],
+    tags: ['PID', 'Control'],
+  },
+  {
+    period: '2025.9',
+    title: '建模与优化算法',
+    points: [
+      '线性回归、插值、决策树、马尔可夫随机',
+      'TOPSIS、粒子群、模拟退火、PSO',
+      '随机森林、XGBoost、简单神经网络、PINNs',
+    ],
+    tags: ['Modeling', 'Optimization'],
+  },
+  {
+    period: '2025.12',
+    title: '深度学习核心模型',
+    points: [
+      '感知机、MLP、DNN、SNN',
+      'CNN、RNN（LSTM）、GRU',
+      'Attention、Transformer、MoE / Mamba',
+    ],
+    tags: ['DL', 'Transformer'],
+  },
+  {
+    period: '2025.12',
+    title: '控制算法进阶',
+    points: [
+      '卡尔曼滤波与自适应卡尔曼',
+      '滤波器与施密特触发器等工程技巧',
+    ],
+    tags: ['Kalman', 'Estimation'],
+  },
+]
 </script>

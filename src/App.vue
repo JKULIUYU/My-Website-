@@ -230,10 +230,11 @@ import PageHardware from './components/PageHardware.vue'
 import PageArticles from './components/PageArticles.vue'
 import PageProjectMotor from './components/PageProjectMotor.vue'
 import PageProjectAckermann from './components/PageProjectAckermann.vue'
+import PageProjectDevBoard from './components/PageProjectDevBoard.vue'
 import avatarImg from './assets/avatar.png'
 
 // ================= 页面导航状态 =================
-type PageName = 'home' | 'projects' | 'algorithms' | 'hardware' | 'articles' | 'algo_ai' | 'algo_control' | 'project_motor' | 'project_ackermann';
+type PageName = 'home' | 'projects' | 'algorithms' | 'hardware' | 'articles' | 'algo_ai' | 'algo_control' | 'project_motor' | 'project_ackermann' | 'project_devboard';
 const currentPage = ref<PageName>('home');
 
 // 处理子页面返回逻辑
@@ -244,7 +245,7 @@ const handleBack = () => {
   }
   if (currentPage.value === 'algo_ai' || currentPage.value === 'algo_control') {
     currentPage.value = 'algorithms';
-  } else if (currentPage.value === 'project_motor' || currentPage.value === 'project_ackermann') {
+  } else if (currentPage.value === 'project_motor' || currentPage.value === 'project_ackermann' || currentPage.value === 'project_devboard') {
     currentPage.value = 'projects';
   } else {
     currentPage.value = 'home';
@@ -262,6 +263,7 @@ const pageRegistry: Record<PageName, Component> = {
   articles: PageArticles,
   project_motor: PageProjectMotor,
   project_ackermann: PageProjectAckermann,
+  project_devboard: PageProjectDevBoard,
 };
 
 // 当前应渲染的组件 (由 computed 自动追踪 currentPage 的变化)
@@ -271,6 +273,7 @@ const currentPageComponent = computed(() => pageRegistry[currentPage.value]);
 const pageToHash = (page: PageName) => {
   if (page === 'project_motor') return '#/projects/project_motor';
   if (page === 'project_ackermann') return '#/projects/project_ackermann';
+  if (page === 'project_devboard') return '#/projects/project_devboard';
   return page === 'home' ? '' : `#/${page}`;
 };
 
@@ -288,6 +291,7 @@ const readPageFromUrl = (): PageName => {
   }
   if (hash === 'projects/project_motor') return 'project_motor';
   if (hash === 'projects/project_ackermann') return 'project_ackermann';
+  if (hash === 'projects/project_devboard') return 'project_devboard';
   return 'home';
 };
 const isHistoryNavigating = ref(false);
