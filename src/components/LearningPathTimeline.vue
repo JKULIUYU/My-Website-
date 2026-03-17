@@ -58,7 +58,7 @@ type TimelineItem = {
   track?: string
 }
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   title: string
   eyebrow?: string
   subtitle?: string
