@@ -12,12 +12,11 @@
       <!-- 项目1: 教育机器人 -->
       <button
         type="button"
-        @pointerdown="openMotor"
         @click="openMotor"
         @keydown.enter.prevent="openMotor"
         class="block outline-none text-left"
       >
-        <BentoCard :pulse="isMotorPulse">
+        <BentoCard :pulse="activePulse === 'motor'">
         <div class="flex items-center gap-3 mb-4">
           <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center font-bold text-sm">P1</div>
           <div>
@@ -41,12 +40,11 @@
       <!-- 项目2: 阿克曼小车 -->
       <button
         type="button"
-        @pointerdown="openAckermann"
         @click="openAckermann"
         @keydown.enter.prevent="openAckermann"
         class="block outline-none text-left"
       >
-        <BentoCard :pulse="isAckermannPulse">
+        <BentoCard :pulse="activePulse === 'ackermann'">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-600 flex items-center justify-center font-bold text-sm">P2</div>
             <div>
@@ -72,12 +70,11 @@
       <!-- 项目3: 少儿编程板 -->
       <button
         type="button"
-        @pointerdown="openDevBoard"
         @click="openDevBoard"
         @keydown.enter.prevent="openDevBoard"
         class="block outline-none text-left"
       >
-        <BentoCard :pulse="isDevBoardPulse">
+        <BentoCard :pulse="activePulse === 'devboard'">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-600 flex items-center justify-center font-bold text-sm">P3</div>
             <div>
@@ -119,57 +116,46 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onUnmounted, ref } from 'vue'
 import BentoCard from './BentoCard.vue'
 
 const emit = defineEmits<{
   (e: 'open', page: string): void
 }>()
 
-const isMotorOpening = ref(false)
-const isMotorPulse = ref(false)
-const isAckermannOpening = ref(false)
-const isAckermannPulse = ref(false)
-const isDevBoardOpening = ref(false)
-const isDevBoardPulse = ref(false)
+type ProjectPulse = 'motor' | 'ackermann' | 'devboard' | null
+const activePulse = ref<ProjectPulse>(null)
+let openTimer: ReturnType<typeof setTimeout> | null = null
+const CARD_OPEN_DELAY = 280
+
+const openWithPulse = (pulse: Exclude<ProjectPulse, null>, page: string) => {
+  if (openTimer) {
+    clearTimeout(openTimer)
+  }
+  activePulse.value = pulse
+  openTimer = setTimeout(() => {
+    activePulse.value = null
+    emit('open', page)
+    openTimer = null
+  }, CARD_OPEN_DELAY)
+}
 
 const openMotor = () => {
-  if (isMotorOpening.value) return
-  // 先触发一次“点击脉冲”，再进入详情
-  isMotorOpening.value = true
-  isMotorPulse.value = false
-  requestAnimationFrame(() => {
-    isMotorPulse.value = true
-  })
-  setTimeout(() => {
-    isMotorPulse.value = false
-    emit('open', 'project_motor')
-  }, 220)
+  openWithPulse('motor', 'project_motor')
 }
 
 const openAckermann = () => {
-  if (isAckermannOpening.value) return
-  isAckermannOpening.value = true
-  isAckermannPulse.value = false
-  requestAnimationFrame(() => {
-    isAckermannPulse.value = true
-  })
-  setTimeout(() => {
-    isAckermannPulse.value = false
-    emit('open', 'project_ackermann')
-  }, 220)
+  openWithPulse('ackermann', 'project_ackermann')
 }
 
 const openDevBoard = () => {
-  if (isDevBoardOpening.value) return
-  isDevBoardOpening.value = true
-  isDevBoardPulse.value = false
-  requestAnimationFrame(() => {
-    isDevBoardPulse.value = true
-  })
-  setTimeout(() => {
-    isDevBoardPulse.value = false
-    emit('open', 'project_devboard')
-  }, 220)
+  openWithPulse('devboard', 'project_devboard')
 }
+
+onUnmounted(() => {
+  if (openTimer) {
+    clearTimeout(openTimer)
+    openTimer = null
+  }
+})
 </script>

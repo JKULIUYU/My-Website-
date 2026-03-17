@@ -5,13 +5,13 @@
   >
     
     <!-- 全屏动态粒子特效 Canvas (z-index: 0 放于最底层) -->
-    <canvas ref="particleCanvas" class="absolute inset-0 w-full h-full z-0 pointer-events-none"></canvas>
+    <canvas ref="particleCanvas" class="absolute inset-0 w-full h-full z-0 pointer-events-none perf-canvas"></canvas>
 
     <!-- 视图切换容器 -->
     <Transition name="page" mode="out-in">
       
       <!-- 主页：极简流线型网格主框架: 分为三列 (侧边栏、中枢区、右侧边栏) -->
-      <main v-if="currentPage === 'home'" key="home" class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-4 gap-6 relative z-10">
+      <main v-if="currentPage === 'home'" key="home" class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-4 gap-6 relative z-10 perf-content">
       
       <!-- ================= 左侧：导览区域 (Col 1) ================= -->
       <div class="flex flex-col gap-6">
@@ -150,7 +150,7 @@
       </main>
 
       <!-- 子页面：独立的阅读/展示视图 -->
-      <div v-else key="subpage" class="w-full max-w-4xl mx-auto flex flex-col gap-6 relative z-10 pb-24">
+      <div v-else key="subpage" class="w-full max-w-4xl mx-auto flex flex-col gap-6 relative z-10 pb-24 perf-content">
         <!-- 返回键区域 -->
         <div class="flex items-center mb-2">
           <button @click="handleBack" class="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] hover:bg-white/60 dark:hover:bg-white/10 text-[var(--accent-color)] transition-all shadow-sm focus:outline-none backdrop-blur-md font-bold group">
@@ -159,14 +159,14 @@
           </button>
         </div>
         
-        <!-- 页面内容 -->
+        <!-- 页面内容（移除内层 mode=out-in 过渡，避免首次切换偶发空白） -->
         <component :is="currentPageComponent" :key="currentPage" @open="currentPage = $event" @back="handleBack" />
       </div>
 
     </Transition>
 
     <!-- ================= 浮动组件容器：固定在视口四角 ================= -->
-    <div class="fixed inset-0 z-50 pointer-events-none">
+    <div class="fixed inset-0 z-50 pointer-events-none perf-floating">
       <!-- ================= 浮动组件：莫兰迪主题切换器 ================= -->
       <div class="absolute bottom-6 left-6 flex items-center gap-2 bg-[var(--card-bg)] backdrop-blur-3xl p-1.5 rounded-full border border-[var(--card-border)] shadow-lg transition-all duration-300 hover:shadow-xl pointer-events-auto">
         <button 
@@ -335,6 +335,7 @@ const applyTheme = (mode: ThemeMode) => {
   
   // 切换主题时，如果有粒子引擎在跑，我们要重置一些颜色
   if (canvasCtx) {
+    buildParticleSprites();
     initParticles();
   }
 
@@ -466,6 +467,62 @@ const particleCanvas = ref<HTMLCanvasElement | null>(null);
 let animationFrameId: number;
 let canvasCtx: CanvasRenderingContext2D | null = null;
 let particles: Particle[] = [];
+let lightSprites: HTMLCanvasElement[] = [];
+let darkSprite: HTMLCanvasElement | null = null;
+let activeParticleCount = 0;
+let maxParticleCount = 0;
+let minParticleCount = 0;
+let viewportWidth = window.innerWidth;
+let viewportHeight = window.innerHeight;
+let canvasScale = 1;
+let lastFrameTime = 0;
+let avgFrameMs = 16.7;
+let frameTick = 0;
+let resizeRaf = 0;
+type PerformanceMode = 'auto' | 'off';
+const performanceMode: PerformanceMode = 'auto';
+
+const makePetalSprite = (color: string) => {
+  const sprite = document.createElement('canvas');
+  sprite.width = 32;
+  sprite.height = 24;
+  const ctx = sprite.getContext('2d');
+  if (!ctx) return sprite;
+  ctx.clearRect(0, 0, sprite.width, sprite.height);
+  ctx.shadowBlur = 6;
+  ctx.shadowColor = 'rgba(247, 161, 180, 0.3)';
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.ellipse(16, 12, 9, 6, 0, 0, Math.PI * 2);
+  ctx.fill();
+  return sprite;
+};
+
+const makeSnowSprite = () => {
+  const sprite = document.createElement('canvas');
+  sprite.width = 18;
+  sprite.height = 18;
+  const ctx = sprite.getContext('2d');
+  if (!ctx) return sprite;
+  ctx.clearRect(0, 0, sprite.width, sprite.height);
+  ctx.shadowBlur = 4;
+  ctx.shadowColor = 'rgba(200, 230, 255, 0.5)';
+  ctx.fillStyle = 'rgba(200, 230, 255, 1)';
+  ctx.beginPath();
+  ctx.arc(9, 9, 4.5, 0, Math.PI * 2);
+  ctx.fill();
+  return sprite;
+};
+
+const buildParticleSprites = () => {
+  if (!particleCanvas.value) return;
+  lightSprites = [
+    makePetalSprite('rgba(255, 192, 203, 1)'),
+    makePetalSprite('rgba(247, 161, 180, 1)'),
+    makePetalSprite('rgba(242, 127, 148, 1)'),
+  ];
+  darkSprite = makeSnowSprite();
+};
 
 class Particle {
   x: number;
@@ -480,10 +537,30 @@ class Particle {
   scaleXSpeed: number;
   opacity: number;
   colorType: number; // 随机决定瓣尖儿是否带点深粉或全白
+  spriteIndex: number;
+  updateEvery: number;
 
   constructor(w: number, h: number) {
+    this.x = 0;
+    this.y = 0;
+    this.baseSize = 0;
+    this.size = 0;
+    this.speedX = 0;
+    this.speedY = 0;
+    this.rotation = 0;
+    this.rotationSpeed = 0;
+    this.scaleX = 0;
+    this.scaleXSpeed = 0;
+    this.opacity = 1;
+    this.colorType = 0;
+    this.spriteIndex = 0;
+    this.updateEvery = 1;
+    this.reset(w, h, false);
+  }
+
+  reset(w: number, h: number, fromTop: boolean) {
     this.x = Math.random() * w;
-    this.y = Math.random() * h;
+    this.y = fromTop ? -20 : Math.random() * h;
     // 更有层次感的深度：大小不一
     this.baseSize = isCurrentlyDark.value ? Math.random() * 2 + 1 : Math.random() * 6 + 4;
     this.size = this.baseSize;
@@ -500,9 +577,13 @@ class Particle {
     
     this.opacity = Math.random() * 0.6 + 0.3; // 提升可视度
     this.colorType = Math.random(); // 用于混色
+    this.spriteIndex = this.colorType > 0.7 ? 2 : this.colorType > 0.3 ? 1 : 0;
+    this.updateEvery = this.baseSize < (isCurrentlyDark.value ? 1.7 : 4.6) ? 2 : 1;
   }
 
-  update(w: number, h: number) {
+  update(w: number, h: number, tick: number) {
+    if (this.updateEvery === 2 && tick % 2 === 1) return;
+
     this.x += this.speedX;
     this.y += this.speedY;
     
@@ -521,9 +602,7 @@ class Particle {
     
     // 下落越界重生
     if (this.y > h + this.size || this.x > w + this.size || this.x < -this.size) {
-      this.x = Math.random() * w;
-      this.y = -20;
-      this.speedX = isCurrentlyDark.value ? (Math.random() - 0.5) * 1 : Math.random() * 2 - 1.5;
+      this.reset(w, h, true);
     }
   }
 
@@ -533,66 +612,92 @@ class Particle {
     ctx.rotate((this.rotation * Math.PI) / 180);
     // 使用 scaleX 实现 3D 翻转的视觉错觉
     ctx.scale(this.scaleX, 1);
-
-    ctx.beginPath();
-    if (isCurrentlyDark.value) {
-       // 暗色模式：保留圆润的发光小雪花/光点
-       ctx.arc(0, 0, this.baseSize, 0, Math.PI * 2);
-       ctx.fillStyle = `rgba(200, 230, 255, ${this.opacity})`;
-       // 微微的弥散发光
-       ctx.shadowBlur = 4;
-       ctx.shadowColor = `rgba(200, 230, 255, 0.5)`;
-    } else {
-       // 浅色模式：绘制椭圆形的樱花花瓣
-       // 利用二次贝塞尔曲线画花瓣形状或者简单的椭圆
-       ctx.ellipse(0, 0, this.baseSize, this.baseSize * 0.6, 0, 0, Math.PI * 2);
-       
-       // 提升色彩浓度，使其与背景产生更强的对比区分度
-       // 提高基础不透明度底线，混合更深的樱花红、玫红和深粉色
-       const petalOpacity = Math.min(1, this.opacity + 0.3); // 整体加深受可视度
-       if (this.colorType > 0.7) {
-          ctx.fillStyle = `rgba(242, 127, 148, ${petalOpacity})`; // 浓烈的绯红
-       } else if (this.colorType > 0.3) {
-          ctx.fillStyle = `rgba(247, 161, 180, ${petalOpacity})`; // 中等樱花红
-       } else {
-          ctx.fillStyle = `rgba(255, 192, 203, ${petalOpacity})`; // 浅一点的粉红作为点缀
-       }
-       ctx.shadowBlur = 6;
-       ctx.shadowColor = `rgba(247, 161, 180, 0.3)`;
+    const sprite = isCurrentlyDark.value ? darkSprite : lightSprites[this.spriteIndex];
+    if (sprite) {
+      const opacity = isCurrentlyDark.value ? this.opacity : Math.min(1, this.opacity + 0.3);
+      const width = isCurrentlyDark.value ? this.baseSize * 2.2 : this.baseSize * 2.8;
+      const height = isCurrentlyDark.value ? this.baseSize * 2.2 : this.baseSize * 1.9;
+      ctx.globalAlpha = opacity;
+      ctx.drawImage(sprite, -width / 2, -height / 2, width, height);
+      ctx.globalAlpha = 1;
     }
-    
-    ctx.fill();
     ctx.restore();
   }
 }
 
 const resizeCanvas = () => {
-  if (particleCanvas.value) {
-    particleCanvas.value.width = window.innerWidth;
-    particleCanvas.value.height = window.innerHeight;
+  if (particleCanvas.value && canvasCtx) {
+    viewportWidth = window.innerWidth;
+    viewportHeight = window.innerHeight;
+    canvasScale = Math.min(window.devicePixelRatio || 1, 1.5);
+    particleCanvas.value.width = Math.floor(viewportWidth * canvasScale);
+    particleCanvas.value.height = Math.floor(viewportHeight * canvasScale);
+    canvasCtx.setTransform(canvasScale, 0, 0, canvasScale, 0, 0);
   }
 };
 
 const initParticles = () => {
-  if (!particleCanvas.value) return;
-  particles = [];
-  const count = window.innerWidth < 768 ? 40 : 100; // 稍微控制总量防止卡顿
-  for (let i = 0; i < count; i++) {
-    particles.push(new Particle(particleCanvas.value.width, particleCanvas.value.height));
+  maxParticleCount = viewportWidth < 768 ? 40 : 100;
+  minParticleCount = viewportWidth < 768 ? 24 : 56;
+  activeParticleCount = maxParticleCount;
+  if (particles.length < maxParticleCount) {
+    for (let i = particles.length; i < maxParticleCount; i++) {
+      particles.push(new Particle(viewportWidth, viewportHeight));
+    }
+  }
+  for (let i = 0; i < maxParticleCount; i++) {
+    particles[i].reset(viewportWidth, viewportHeight, false);
   }
 };
 
-const renderParticles = () => {
-  if (!particleCanvas.value || !canvasCtx) return;
-  
-  canvasCtx.clearRect(0, 0, particleCanvas.value.width, particleCanvas.value.height);
-  
-  particles.forEach(p => {
-    if (particleCanvas.value && canvasCtx) { // Add null check for canvasCtx
-      p.update(particleCanvas.value.width, particleCanvas.value.height);
-      p.draw(canvasCtx);
-    }
+const handleResize = () => {
+  if (resizeRaf) cancelAnimationFrame(resizeRaf);
+  resizeRaf = requestAnimationFrame(() => {
+    resizeCanvas();
+    initParticles();
+    resizeRaf = 0;
   });
+};
+
+const handleVisibilityChange = () => {
+  lastFrameTime = 0;
+};
+
+const renderParticles = (now = 0) => {
+  if (!particleCanvas.value || !canvasCtx) return;
+  if (document.hidden) {
+    animationFrameId = requestAnimationFrame(renderParticles);
+    return;
+  }
+
+  if (lastFrameTime === 0) lastFrameTime = now;
+  if (now - lastFrameTime < 1000 / 60) {
+    animationFrameId = requestAnimationFrame(renderParticles);
+    return;
+  }
+  lastFrameTime = now;
+
+  const frameStart = performance.now();
+  canvasCtx.clearRect(0, 0, viewportWidth, viewportHeight);
+
+  frameTick += 1;
+  const width = viewportWidth;
+  const height = viewportHeight;
+  for (let i = 0; i < activeParticleCount; i++) {
+    const p = particles[i];
+    p.update(width, height, frameTick);
+    p.draw(canvasCtx);
+  }
+
+  const frameCost = performance.now() - frameStart;
+  avgFrameMs = avgFrameMs * 0.9 + frameCost * 0.1;
+  if (performanceMode === 'auto') {
+    if (avgFrameMs > 13 && activeParticleCount > minParticleCount) {
+      activeParticleCount -= 1;
+    } else if (avgFrameMs < 8.5 && activeParticleCount < maxParticleCount) {
+      activeParticleCount += 1;
+    }
+  }
 
   animationFrameId = requestAnimationFrame(renderParticles);
 };
@@ -616,13 +721,12 @@ onMounted(() => {
   // 初始化 Canvas
   if (particleCanvas.value) {
     canvasCtx = particleCanvas.value.getContext('2d');
+    buildParticleSprites();
     resizeCanvas();
     initParticles();
-    renderParticles();
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      initParticles();
-    });
+    renderParticles(0);
+    window.addEventListener('resize', handleResize, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibilityChange);
   }
 
   // 监听浏览器返回/前进
@@ -633,7 +737,9 @@ onUnmounted(() => {
   clearInterval(timer)
   if (themeAutoInterval) clearInterval(themeAutoInterval);
   cancelAnimationFrame(animationFrameId);
-  window.removeEventListener('resize', resizeCanvas);
+  if (resizeRaf) cancelAnimationFrame(resizeRaf);
+  window.removeEventListener('resize', handleResize);
+  document.removeEventListener('visibilitychange', handleVisibilityChange);
   window.removeEventListener('popstate', handlePopstate);
 })
 
