@@ -229,10 +229,11 @@ import PageAlgoControl from './components/PageAlgoControl.vue'
 import PageHardware from './components/PageHardware.vue'
 import PageArticles from './components/PageArticles.vue'
 import PageProjectMotor from './components/PageProjectMotor.vue'
+import PageProjectAckermann from './components/PageProjectAckermann.vue'
 import avatarImg from './assets/avatar.png'
 
 // ================= 页面导航状态 =================
-type PageName = 'home' | 'projects' | 'algorithms' | 'hardware' | 'articles' | 'algo_ai' | 'algo_control' | 'project_motor';
+type PageName = 'home' | 'projects' | 'algorithms' | 'hardware' | 'articles' | 'algo_ai' | 'algo_control' | 'project_motor' | 'project_ackermann';
 const currentPage = ref<PageName>('home');
 
 // 处理子页面返回逻辑
@@ -243,7 +244,7 @@ const handleBack = () => {
   }
   if (currentPage.value === 'algo_ai' || currentPage.value === 'algo_control') {
     currentPage.value = 'algorithms';
-  } else if (currentPage.value === 'project_motor') {
+  } else if (currentPage.value === 'project_motor' || currentPage.value === 'project_ackermann') {
     currentPage.value = 'projects';
   } else {
     currentPage.value = 'home';
@@ -260,6 +261,7 @@ const pageRegistry: Record<PageName, Component> = {
   hardware: PageHardware,
   articles: PageArticles,
   project_motor: PageProjectMotor,
+  project_ackermann: PageProjectAckermann,
 };
 
 // 当前应渲染的组件 (由 computed 自动追踪 currentPage 的变化)
@@ -268,6 +270,7 @@ const currentPageComponent = computed(() => pageRegistry[currentPage.value]);
 // ================= 浏览器历史记录支持 =================
 const pageToHash = (page: PageName) => {
   if (page === 'project_motor') return '#/projects/project_motor';
+  if (page === 'project_ackermann') return '#/projects/project_ackermann';
   return page === 'home' ? '' : `#/${page}`;
 };
 
@@ -284,6 +287,7 @@ const readPageFromUrl = (): PageName => {
     return hash as PageName;
   }
   if (hash === 'projects/project_motor') return 'project_motor';
+  if (hash === 'projects/project_ackermann') return 'project_ackermann';
   return 'home';
 };
 const isHistoryNavigating = ref(false);

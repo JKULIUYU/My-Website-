@@ -39,22 +39,35 @@
       </button>
 
       <!-- 项目2: 阿克曼小车 -->
-      <BentoCard>
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-600 flex items-center justify-center font-bold text-sm">P2</div>
-          <div>
-            <div class="font-bold text-sm text-[var(--text-main)]">阿克曼转向遥控小车</div>
-            <div class="text-[10px] text-[var(--text-muted)]">2025 暑假</div>
+      <button
+        type="button"
+        @pointerdown="openAckermann"
+        @click="openAckermann"
+        @keydown.enter.prevent="openAckermann"
+        class="block outline-none text-left"
+      >
+        <BentoCard :pulse="isAckermannPulse">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-600 flex items-center justify-center font-bold text-sm">P2</div>
+            <div>
+              <div class="font-bold text-sm text-[var(--text-main)]">阿克曼转向遥控小车</div>
+              <div class="text-[10px] text-[var(--text-muted)]">2025 暑假</div>
+            </div>
           </div>
-        </div>
-        <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">采用 STM32F1 主控，集成 2.4G 通信、UWB 测距模块（测距+方位角）实现自动跟随与超声波避障。整车运行 FreeRTOS 实时操作系统，自定义通信协议。</p>
-        <div class="flex flex-wrap gap-1.5">
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">STM32</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">FreeRTOS</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">UWB</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">PCB</span>
-        </div>
-      </BentoCard>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-3">
+            公司项目（未开源）。多功能阿克曼转向小车，模块化遥控 + UWB 跟随 + 超声避障。
+            遥控端采集摇杆与按键输入，经 2.4G 发送；车体端解析控制并输出电机 PWM 与舵机 PWM。
+          </p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">STM32F103</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">PY32F003</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">JDY41</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">UWB</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">Ultrasonic</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/20 text-[var(--text-muted)] font-medium">Private</span>
+          </div>
+        </BentoCard>
+      </button>
 
       <!-- 项目3: 少儿编程板 -->
       <BentoCard>
@@ -104,6 +117,8 @@ const emit = defineEmits<{
 
 const isMotorOpening = ref(false)
 const isMotorPulse = ref(false)
+const isAckermannOpening = ref(false)
+const isAckermannPulse = ref(false)
 
 const openMotor = () => {
   if (isMotorOpening.value) return
@@ -116,6 +131,19 @@ const openMotor = () => {
   setTimeout(() => {
     isMotorPulse.value = false
     emit('open', 'project_motor')
+  }, 220)
+}
+
+const openAckermann = () => {
+  if (isAckermannOpening.value) return
+  isAckermannOpening.value = true
+  isAckermannPulse.value = false
+  requestAnimationFrame(() => {
+    isAckermannPulse.value = true
+  })
+  setTimeout(() => {
+    isAckermannPulse.value = false
+    emit('open', 'project_ackermann')
   }, 220)
 }
 </script>
