@@ -106,6 +106,31 @@
     </BentoCard>
 
     <BentoCard>
+      <div class="text-xs text-[var(--text-muted)] tracking-widest font-bold mb-4">HARDWARE DESIGN</div>
+      <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+        主控板使用 12V 输入，经 DCDC 转 5V，再由 LDO 稳压到 3.3V，为主控与传感模块供电。
+        遥控器采用 3.7V 锂电池，经 LDO 降压到 3V，保证摇杆与无线模块的稳定供电。
+        供电链路与模块分区明确，便于后续扩展与维护。
+      </p>
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-3 rounded-2xl bg-white/5 border border-[var(--card-border)]">
+          <div class="text-xs font-semibold text-[var(--text-main)] mb-2">主控 PCB（正面 / 反面）</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <img :src="mainTopImg" alt="Main PCB top" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
+            <img :src="mainBottomImg" alt="Main PCB bottom" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
+          </div>
+        </div>
+        <div class="p-3 rounded-2xl bg-white/5 border border-[var(--card-border)]">
+          <div class="text-xs font-semibold text-[var(--text-main)] mb-2">遥控 PCB（正面 / 反面）</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <img :src="remoteTopImg" alt="Remote PCB top" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
+            <img :src="remoteBottomImg" alt="Remote PCB bottom" class="w-full rounded-xl border border-[var(--card-border)] object-cover" />
+          </div>
+        </div>
+      </div>
+    </BentoCard>
+
+    <BentoCard>
       <div class="text-xs text-[var(--text-muted)] tracking-widest font-bold mb-4">APPLICATION</div>
       <p class="text-sm text-[var(--text-muted)] leading-relaxed">
         支持遥控驾驶、自动跟随与安全避障三种模式切换，适用于教学演示、模块化控制课程与小型竞赛场景。
@@ -117,4 +142,8 @@
 
 <script setup lang="ts">
 import BentoCard from './BentoCard.vue'
+import mainTopImg from '../assets/ackermann/ackermann-main-top.png'
+import mainBottomImg from '../assets/ackermann/ackermann-main-bottom.png'
+import remoteTopImg from '../assets/ackermann/ackermann-remote-top.png'
+import remoteBottomImg from '../assets/ackermann/ackermann-remote-bottom.png'
 </script>
