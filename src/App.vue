@@ -72,7 +72,7 @@
 
       <!-- ================= 中部：核心控制台 (Col 2 & 3) ================= -->
       <div class="lg:col-span-2 flex flex-col gap-6">
-        <PageHome :timeGreeting="timeGreeting" />
+        <PageHome :timeGreeting="timeGreeting" @open="currentPage = $event" />
       </div>
 
       <!-- ================= 右侧：仪表盘区 (Col 4) ================= -->
@@ -229,6 +229,7 @@ import { ref, onMounted, onUnmounted, computed, watch, type Component } from 'vu
 import BentoCard from './components/BentoCard.vue'
 import PageHome from './components/PageHome.vue'
 import PageProjects from './components/PageProjects.vue'
+import PageAbout from './components/PageAbout.vue'
 import PageAlgorithms from './components/PageAlgorithms.vue'
 import PageAlgoAI from './components/PageAlgoAI.vue'
 import PageAlgoControl from './components/PageAlgoControl.vue'
@@ -240,7 +241,7 @@ import PageProjectDevBoard from './components/PageProjectDevBoard.vue'
 import avatarImg from './assets/avatar.png'
 
 // ================= 页面导航状态 =================
-type PageName = 'home' | 'projects' | 'algorithms' | 'hardware' | 'articles' | 'algo_ai' | 'algo_control' | 'project_motor' | 'project_ackermann' | 'project_devboard';
+type PageName = 'home' | 'about' | 'projects' | 'algorithms' | 'hardware' | 'articles' | 'algo_ai' | 'algo_control' | 'project_motor' | 'project_ackermann' | 'project_devboard';
 const currentPage = ref<PageName>('home');
 
 // 处理子页面返回逻辑
@@ -261,6 +262,7 @@ const handleBack = () => {
 // 页面注册表：映射页面名称到对应的组件
 const pageRegistry: Record<PageName, Component> = {
   home: PageHome,
+  about: PageAbout,
   projects: PageProjects,
   algorithms: PageAlgorithms,
   algo_ai: PageAlgoAI,
@@ -292,7 +294,7 @@ const syncUrlWithPage = (page: PageName) => {
 const readPageFromUrl = (): PageName => {
   const hash = window.location.hash.replace('#/', '').trim();
   if (!hash) return 'home';
-  if (hash === 'projects' || hash === 'algorithms' || hash === 'hardware' || hash === 'articles' || hash === 'algo_ai' || hash === 'algo_control') {
+  if (hash === 'about' || hash === 'projects' || hash === 'algorithms' || hash === 'hardware' || hash === 'articles' || hash === 'algo_ai' || hash === 'algo_control') {
     return hash as PageName;
   }
   if (hash === 'projects/project_motor') return 'project_motor';

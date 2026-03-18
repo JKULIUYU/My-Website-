@@ -10,6 +10,7 @@
     </BentoCard>
 
     <!-- 个人名片与核心问候 -->
+    <div class="cursor-pointer" @click="emit('open', 'about')">
     <BentoCard class="flex flex-col items-center justify-center py-10 xl:py-16 text-center shadow-sm">
       <div class="mb-8 relative z-10">
          <div class="relative inline-block group/avatar cursor-pointer">
@@ -24,6 +25,7 @@
         I'm <span class="text-[var(--accent-color)]">jkuliuyu</span> , Nice to meet you!
       </h1>
     </BentoCard>
+    </div>
 
     <!-- 外部社交/代码传送门行 -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -69,5 +71,9 @@ import avatarImg from '../assets/avatar.png'
 
 defineProps<{
   timeGreeting: string
+}>()
+
+const emit = defineEmits<{
+  (e: 'open', page: 'about'): void
 }>()
 </script>
