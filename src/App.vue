@@ -32,23 +32,23 @@
           <div class="text-xs font-bold text-[var(--text-muted)] tracking-widest mb-4">GENERAL</div>
           
           <nav class="flex flex-col gap-3 font-medium">
-            <a @click.prevent="currentPage = 'home'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40">
+            <a @click.prevent="currentPage = 'home'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40 hover:translate-x-0.5 active:scale-[0.98] active:bg-white/50">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
               <span class="transition-all duration-300 group-hover:text-[var(--accent-color)] group-hover:tracking-wide">近期进展</span>
             </a>
-            <a @click.prevent="currentPage = 'projects'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40">
+            <a @click.prevent="currentPage = 'projects'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40 hover:translate-x-0.5 active:scale-[0.98] active:bg-white/50">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
               <span class="transition-all duration-300 group-hover:text-[var(--accent-color)] group-hover:tracking-wide">我的项目</span>
             </a>
-            <a @click.prevent="currentPage = 'algorithms'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40">
+            <a @click.prevent="currentPage = 'algorithms'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40 hover:translate-x-0.5 active:scale-[0.98] active:bg-white/50">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               <span class="transition-all duration-300 group-hover:text-[var(--accent-color)] group-hover:tracking-wide">底层算法</span>
             </a>
-            <a @click.prevent="currentPage = 'hardware'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40">
+            <a @click.prevent="currentPage = 'hardware'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40 hover:translate-x-0.5 active:scale-[0.98] active:bg-white/50">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
               <span class="transition-all duration-300 group-hover:text-[var(--accent-color)] group-hover:tracking-wide">硬件仓库</span>
             </a>
-            <a @click.prevent="currentPage = 'articles'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40">
+            <a @click.prevent="currentPage = 'articles'" href="#" class="group flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer text-[var(--text-muted)] hover:bg-white/40 hover:translate-x-0.5 active:scale-[0.98] active:bg-white/50">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
               <span class="transition-all duration-300 group-hover:text-[var(--accent-color)] group-hover:tracking-wide">文章推荐</span>
             </a>
@@ -153,7 +153,7 @@
       <div v-else key="subpage" class="w-full max-w-4xl mx-auto flex flex-col gap-6 relative z-10 pb-24 perf-content">
         <!-- 返回键区域 -->
         <div class="flex items-center mb-2">
-          <button @click="handleBack" class="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] hover:bg-white/60 dark:hover:bg-white/10 text-[var(--accent-color)] transition-all shadow-sm focus:outline-none backdrop-blur-md font-bold group">
+          <button @click="handleBack" class="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[var(--card-bg)] border border-[var(--card-border)] hover:bg-white/60 dark:hover:bg-white/10 text-[var(--accent-color)] transition-all shadow-sm focus:outline-none backdrop-blur-md font-bold group active:scale-[0.97]">
             <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             返回主页
           </button>
@@ -216,6 +216,16 @@
           <svg class="w-5 h-5 transition-all duration-500" :class="isLiked ? 'scale-110 fill-current' : 'fill-none stroke-current stroke-2'" viewBox="0 0 24 24">
             <path class="transition-all" stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
           </svg>
+          <!-- 点赞迸发：扩散光环 + 向外飞散的小火花（仅一次性播放，不影响常态外观） -->
+          <template v-if="showLikeBurst">
+            <span class="like-ring absolute inset-0 rounded-full border-2 border-red-500 pointer-events-none"></span>
+            <span
+              v-for="(spark, i) in likeSparks"
+              :key="i"
+              class="like-spark absolute left-1/2 top-1/2 w-1.5 h-1.5 -ml-[3px] -mt-[3px] rounded-full bg-red-500 pointer-events-none"
+              :style="{ '--spark-x': spark.x, '--spark-y': spark.y }"
+            ></span>
+          </template>
         </div>
       </div>
     </div>
@@ -225,19 +235,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed, watch, type Component } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch, defineAsyncComponent, type Component } from 'vue'
 import BentoCard from './components/BentoCard.vue'
+// 首屏视图（home）所需组件保持同步引入，确保首次渲染无延迟。
 import PageHome from './components/PageHome.vue'
-import PageProjects from './components/PageProjects.vue'
-import PageAbout from './components/PageAbout.vue'
-import PageAlgorithms from './components/PageAlgorithms.vue'
-import PageAlgoAI from './components/PageAlgoAI.vue'
-import PageAlgoControl from './components/PageAlgoControl.vue'
-import PageHardware from './components/PageHardware.vue'
-import PageArticles from './components/PageArticles.vue'
-import PageProjectMotor from './components/PageProjectMotor.vue'
-import PageProjectAckermann from './components/PageProjectAckermann.vue'
-import PageProjectDevBoard from './components/PageProjectDevBoard.vue'
+// 其余子页面按需懒加载：拆分出独立 chunk，缩小首屏 JS 体积、加快首次可交互时间。
+// 复用 loader：既用于 defineAsyncComponent，也在浏览器空闲时预取，使切换页面几乎无感。
+const pageLoaders = {
+  projects: () => import('./components/PageProjects.vue'),
+  about: () => import('./components/PageAbout.vue'),
+  algorithms: () => import('./components/PageAlgorithms.vue'),
+  algo_ai: () => import('./components/PageAlgoAI.vue'),
+  algo_control: () => import('./components/PageAlgoControl.vue'),
+  hardware: () => import('./components/PageHardware.vue'),
+  articles: () => import('./components/PageArticles.vue'),
+  project_motor: () => import('./components/PageProjectMotor.vue'),
+  project_ackermann: () => import('./components/PageProjectAckermann.vue'),
+  project_devboard: () => import('./components/PageProjectDevBoard.vue'),
+}
+const PageProjects = defineAsyncComponent(pageLoaders.projects)
+const PageAbout = defineAsyncComponent(pageLoaders.about)
+const PageAlgorithms = defineAsyncComponent(pageLoaders.algorithms)
+const PageAlgoAI = defineAsyncComponent(pageLoaders.algo_ai)
+const PageAlgoControl = defineAsyncComponent(pageLoaders.algo_control)
+const PageHardware = defineAsyncComponent(pageLoaders.hardware)
+const PageArticles = defineAsyncComponent(pageLoaders.articles)
+const PageProjectMotor = defineAsyncComponent(pageLoaders.project_motor)
+const PageProjectAckermann = defineAsyncComponent(pageLoaders.project_ackermann)
+const PageProjectDevBoard = defineAsyncComponent(pageLoaders.project_devboard)
+
+// 首屏渲染完成后，趁浏览器空闲悄悄把一级子页面预取到缓存，避免点击时白屏等待。
+const prefetchSubpages = () => {
+  const idle = (cb: () => void) =>
+    'requestIdleCallback' in window
+      ? (window as any).requestIdleCallback(cb, { timeout: 2000 })
+      : setTimeout(cb, 1200)
+  idle(() => {
+    ;['projects', 'algorithms', 'hardware', 'articles', 'about'].forEach((key) => {
+      void pageLoaders[key as keyof typeof pageLoaders]?.()
+    })
+  })
+}
 import avatarImg from './assets/avatar.png'
 
 // ================= 页面导航状态 =================
@@ -362,6 +400,28 @@ const likeBusy = ref(false);
 const likeError = ref('');
 const likeDeviceKey = 'like-device-id';
 
+// 点赞成功后的心形迸发：6 个向外飞散的小火花 + 一圈扩散光环。
+const showLikeBurst = ref(false);
+const likeSparks = Array.from({ length: 6 }, (_, i) => {
+  const angle = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+  const dist = 22;
+  return {
+    x: `${Math.cos(angle) * dist}px`,
+    y: `${Math.sin(angle) * dist}px`,
+  };
+});
+let likeBurstTimer: ReturnType<typeof setTimeout> | null = null;
+const playLikeBurst = () => {
+  if (typeof window !== 'undefined' && reduceMotionQuery?.matches) return;
+  showLikeBurst.value = false;
+  // 强制重排以便重复触发动画。
+  requestAnimationFrame(() => {
+    showLikeBurst.value = true;
+    if (likeBurstTimer) clearTimeout(likeBurstTimer);
+    likeBurstTimer = setTimeout(() => { showLikeBurst.value = false; }, 700);
+  });
+};
+
 const getDeviceId = () => {
   let id = localStorage.getItem(likeDeviceKey);
   if (!id) {
@@ -407,6 +467,7 @@ const triggerLike = async () => {
     const data = await resp.json();
     likeCount.value = Number.isFinite(data?.count) ? data.count : (likeCount.value ?? 0);
     isLiked.value = Boolean(data?.liked);
+    if (isLiked.value) playLikeBurst();
   } catch (err) {
     likeError.value = 'like failed';
   } finally {
@@ -489,6 +550,13 @@ let frameTick = 0;
 let resizeRaf = 0;
 type PerformanceMode = 'auto' | 'off';
 const performanceMode: PerformanceMode = 'auto';
+
+// 尊重系统“减少动态效果”偏好：关闭粒子动画循环，仅渲染一帧静态画面，
+// 既照顾前庭敏感用户，也为低性能设备省电省 CPU。
+const reduceMotionQuery = typeof window !== 'undefined' && window.matchMedia
+  ? window.matchMedia('(prefers-reduced-motion: reduce)')
+  : null;
+const prefersReducedMotion = () => !!reduceMotionQuery?.matches;
 
 const makePetalSprite = (color: string) => {
   const sprite = document.createElement('canvas');
@@ -658,17 +726,37 @@ const initParticles = () => {
   }
 };
 
+// 减少动态效果时，绘制一帧静态粒子分布作为底纹，而不进入动画循环。
+const renderStaticFrame = () => {
+  if (!canvasCtx) return;
+  canvasCtx.clearRect(0, 0, viewportWidth, viewportHeight);
+  for (let i = 0; i < activeParticleCount; i++) {
+    particles[i].draw(canvasCtx);
+  }
+};
+
 const handleResize = () => {
   if (resizeRaf) cancelAnimationFrame(resizeRaf);
   resizeRaf = requestAnimationFrame(() => {
     resizeCanvas();
     initParticles();
+    if (prefersReducedMotion()) renderStaticFrame();
     resizeRaf = 0;
   });
 };
 
 const handleVisibilityChange = () => {
   lastFrameTime = 0;
+};
+
+const handleReducedMotionChange = () => {
+  cancelAnimationFrame(animationFrameId);
+  if (prefersReducedMotion()) {
+    renderStaticFrame();
+  } else {
+    lastFrameTime = 0;
+    renderParticles(0);
+  }
 };
 
 const renderParticles = (now = 0) => {
@@ -679,7 +767,8 @@ const renderParticles = (now = 0) => {
   }
 
   if (lastFrameTime === 0) lastFrameTime = now;
-  if (now - lastFrameTime < 1000 / 60) {
+  // 目标 60fps，减去 1.5ms 容差，避免与 60Hz 刷新形成“拍频”导致掉到 30fps 的卡顿。
+  if (now - lastFrameTime < 1000 / 60 - 1.5) {
     animationFrameId = requestAnimationFrame(renderParticles);
     return;
   }
@@ -732,13 +821,22 @@ onMounted(() => {
     buildParticleSprites();
     resizeCanvas();
     initParticles();
-    renderParticles(0);
+    if (prefersReducedMotion()) {
+      renderStaticFrame();
+    } else {
+      renderParticles(0);
+    }
     window.addEventListener('resize', handleResize, { passive: true });
     document.addEventListener('visibilitychange', handleVisibilityChange);
+    // 用户在系统层切换“减少动态效果”时实时响应：开启/停止动画循环。
+    reduceMotionQuery?.addEventListener('change', handleReducedMotionChange);
   }
 
   // 监听浏览器返回/前进
   window.addEventListener('popstate', handlePopstate);
+
+  // 首屏空闲时预取子页面，让导航切换更跟手。
+  prefetchSubpages();
 })
 
 onUnmounted(() => {
@@ -746,8 +844,10 @@ onUnmounted(() => {
   if (themeAutoInterval) clearInterval(themeAutoInterval);
   cancelAnimationFrame(animationFrameId);
   if (resizeRaf) cancelAnimationFrame(resizeRaf);
+  if (likeBurstTimer) clearTimeout(likeBurstTimer);
   window.removeEventListener('resize', handleResize);
   document.removeEventListener('visibilitychange', handleVisibilityChange);
+  reduceMotionQuery?.removeEventListener('change', handleReducedMotionChange);
   window.removeEventListener('popstate', handlePopstate);
 })
 

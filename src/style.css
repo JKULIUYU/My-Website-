@@ -194,3 +194,57 @@ body {
     transform: translate3d(0, -12px, 0) scale(0.992);
   }
 }
+
+/* ====== 点赞心形迸发动效 ====== */
+@keyframes like-ring {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.1);
+  }
+}
+.like-ring {
+  animation: like-ring 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes like-spark {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--spark-x), var(--spark-y), 0) scale(1);
+  }
+}
+.like-spark {
+  animation: like-spark 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/*
+  ====== 尊重“减少动态效果”系统偏好 ======
+  关闭大幅位移/缩放/模糊类动画，仅保留极轻量的淡入淡出，
+  兼顾前庭敏感用户与低性能设备的流畅度。粒子动画在 JS 侧另行降级。
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.08s !important;
+    scroll-behavior: auto !important;
+  }
+  .page-enter-from,
+  .page-leave-to {
+    transform: none !important;
+    filter: none !important;
+  }
+  .subpage-panel-enter-active,
+  .subpage-panel-leave-active {
+    animation: none !important;
+  }
+}
