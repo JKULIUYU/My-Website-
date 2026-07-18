@@ -17,7 +17,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       
       <!-- CNN -->
-      <a href="https://cloud.tencent.com/developer/article/2126296" target="_blank" class="block outline-none">
+      <a href="https://cloud.tencent.com/developer/article/2126296" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">COMPUTER VISION</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">一文搞懂卷积神经网络 (CNN) 的原理</div>
@@ -30,7 +30,7 @@
       </a>
 
       <!-- LSTM & GRU -->
-      <a href="https://blog.csdn.net/qq_43962530/article/details/119934752" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/qq_43962530/article/details/119934752" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">SEQUENCE MODELING</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">LSTM 与 GRU 的区别与原理解析</div>
@@ -43,7 +43,7 @@
       </a>
 
       <!-- Transformer & Attention -->
-      <a href="https://www.cnblogs.com/robert-dlut/p/8638283.html" target="_blank" class="block outline-none">
+      <a href="https://www.cnblogs.com/robert-dlut/p/8638283.html" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">NLP / ARCHITECTURE</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">Attention 机制与 Transformer 详解</div>
@@ -56,7 +56,7 @@
       </a>
 
       <!-- PINNs -->
-      <a href="https://blog.csdn.net/weixin_44633882/article/details/129759495" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/weixin_44633882/article/details/129759495" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">PHYSICS-INFORMED</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">PINN 物理信息神经网络入门与实践</div>
@@ -69,7 +69,7 @@
       </a>
 
       <!-- PSO -->
-      <a href="https://cloud.tencent.com/developer/article/1815170" target="_blank" class="block outline-none">
+      <a href="https://cloud.tencent.com/developer/article/1815170" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">OPTIMIZATION ALGORITHM</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">粒子群优化算法 (PSO) 原理及实现</div>
@@ -82,7 +82,7 @@
       </a>
       
       <!-- XGBoost & Random Forest -->
-      <a href="https://blog.csdn.net/v_JULY_v/article/details/81410574" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/v_JULY_v/article/details/81410574" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">ENSEMBLE LEARNING</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">XGBoost 与 Random Forest 树模型解析</div>
@@ -95,7 +95,7 @@
       </a>
 
       <!-- Decision Tree -->
-      <a href="https://blog.csdn.net/qq_41931764/article/details/103181792" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/qq_41931764/article/details/103181792" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">CLASSIC ML</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">决策树算法原理详解</div>
@@ -108,7 +108,7 @@
       </a>
 
       <!-- Markov Random Field -->
-      <a href="https://blog.csdn.net/aptx704610875/article/details/106173714" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/aptx704610875/article/details/106173714" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">PROBABILISTIC MODEL</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">马尔可夫链 / 随机过程入门</div>
@@ -121,7 +121,7 @@
       </a>
 
       <!-- Simulated Annealing -->
-      <a href="https://blog.csdn.net/qq_41194196/article/details/126111335" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/qq_41194196/article/details/126111335" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">OPTIMIZATION</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">模拟退火算法介绍与实例</div>
@@ -134,7 +134,7 @@
       </a>
 
       <!-- TOPSIS -->
-      <a href="https://blog.csdn.net/m0_55903362/article/details/132917440" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/m0_55903362/article/details/132917440" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">MODELING</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">TOPSIS 综合评价方法</div>
@@ -147,7 +147,7 @@
       </a>
 
       <!-- Li Mu DL Course -->
-      <a href="https://www.bilibili.com/video/BV15UREYsEN8/" target="_blank" class="block outline-none">
+      <a href="https://www.bilibili.com/video/BV15UREYsEN8/" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">DEEP LEARNING</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">李沐：动手学深度学习</div>

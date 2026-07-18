@@ -5,13 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "build": "vue-tsc -b && tsc -p tsconfig.worker.json && vite build",
+    "preview": "vite preview",
+    "deploy:counter": "wrangler deploy --config workers/wrangler.toml",
+    "deploy:pages": "wrangler pages deploy dist --project-name my-website"
   },
   "dependencies": {
     "vue": "^3.5.30"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260702.1",
     "@tailwindcss/vite": "^4.0.0",
     "@types/node": "^20.0.0",
     "@vitejs/plugin-vue": "^5.2.1",
@@ -19,7 +22,8 @@
     "tailwindcss": "^4.0.0",
     "typescript": "~5.7.3",
     "vite": "^6.0.0",
-    "vue-tsc": "^2.2.0"
+    "vue-tsc": "^2.2.0",
+    "wrangler": "^4.106.0"
   },
   "description": "This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.",
   "main": "index.js",

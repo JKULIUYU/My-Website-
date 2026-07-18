@@ -252,6 +252,7 @@ const pageLoaders = {
   project_motor: () => import('./components/PageProjectMotor.vue'),
   project_ackermann: () => import('./components/PageProjectAckermann.vue'),
   project_devboard: () => import('./components/PageProjectDevBoard.vue'),
+  project_myohand: () => import('./components/PageProjectMyoHand.vue'),
 }
 const PageProjects = defineAsyncComponent(pageLoaders.projects)
 const PageAbout = defineAsyncComponent(pageLoaders.about)
@@ -263,6 +264,7 @@ const PageArticles = defineAsyncComponent(pageLoaders.articles)
 const PageProjectMotor = defineAsyncComponent(pageLoaders.project_motor)
 const PageProjectAckermann = defineAsyncComponent(pageLoaders.project_ackermann)
 const PageProjectDevBoard = defineAsyncComponent(pageLoaders.project_devboard)
+const PageProjectMyoHand = defineAsyncComponent(pageLoaders.project_myohand)
 
 // 首屏渲染完成后，趁浏览器空闲悄悄把一级子页面预取到缓存，避免点击时白屏等待。
 const prefetchSubpages = () => {
@@ -279,7 +281,7 @@ const prefetchSubpages = () => {
 import avatarImg from './assets/avatar.png'
 
 // ================= 页面导航状态 =================
-type PageName = 'home' | 'about' | 'projects' | 'algorithms' | 'hardware' | 'articles' | 'algo_ai' | 'algo_control' | 'project_motor' | 'project_ackermann' | 'project_devboard';
+type PageName = 'home' | 'about' | 'projects' | 'algorithms' | 'hardware' | 'articles' | 'algo_ai' | 'algo_control' | 'project_motor' | 'project_ackermann' | 'project_devboard' | 'project_myohand';
 const currentPage = ref<PageName>('home');
 
 // 处理子页面返回逻辑
@@ -290,7 +292,7 @@ const handleBack = () => {
   }
   if (currentPage.value === 'algo_ai' || currentPage.value === 'algo_control') {
     currentPage.value = 'algorithms';
-  } else if (currentPage.value === 'project_motor' || currentPage.value === 'project_ackermann' || currentPage.value === 'project_devboard') {
+  } else if (currentPage.value === 'project_motor' || currentPage.value === 'project_ackermann' || currentPage.value === 'project_devboard' || currentPage.value === 'project_myohand') {
     currentPage.value = 'projects';
   } else {
     currentPage.value = 'home';
@@ -310,6 +312,7 @@ const pageRegistry: Record<PageName, Component> = {
   project_motor: PageProjectMotor,
   project_ackermann: PageProjectAckermann,
   project_devboard: PageProjectDevBoard,
+  project_myohand: PageProjectMyoHand,
 };
 
 // 当前应渲染的组件 (由 computed 自动追踪 currentPage 的变化)
@@ -320,6 +323,7 @@ const pageToHash = (page: PageName) => {
   if (page === 'project_motor') return '#/projects/project_motor';
   if (page === 'project_ackermann') return '#/projects/project_ackermann';
   if (page === 'project_devboard') return '#/projects/project_devboard';
+  if (page === 'project_myohand') return '#/projects/project_myohand';
   return page === 'home' ? '' : `#/${page}`;
 };
 
@@ -338,6 +342,7 @@ const readPageFromUrl = (): PageName => {
   if (hash === 'projects/project_motor') return 'project_motor';
   if (hash === 'projects/project_ackermann') return 'project_ackermann';
   if (hash === 'projects/project_devboard') return 'project_devboard';
+  if (hash === 'projects/project_myohand') return 'project_myohand';
   return 'home';
 };
 const isHistoryNavigating = ref(false);

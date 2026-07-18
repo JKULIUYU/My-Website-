@@ -17,7 +17,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       
       <!-- Kalman Filter -->
-      <a href="https://blog.csdn.net/O_MMMM_O/article/details/106268393" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/O_MMMM_O/article/details/106268393" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">STATE ESTIMATION</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">卡尔曼滤波 (Kalman Filter) 详解与推导</div>
@@ -30,7 +30,7 @@
       </a>
 
       <!-- PID Control -->
-      <a href="https://zhuanlan.zhihu.com/p/39573490" target="_blank" class="block outline-none">
+      <a href="https://zhuanlan.zhihu.com/p/39573490" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">CLASSIC CONTROL</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">PID 控制算法通俗易懂全解析</div>
@@ -43,7 +43,7 @@
       </a>
 
       <!-- PID Article (CSDN) -->
-      <a href="https://blog.csdn.net/qq_58114029/article/details/136780577" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/qq_58114029/article/details/136780577" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">CLASSIC CONTROL</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">PID 算法学习笔记</div>
@@ -56,7 +56,7 @@
       </a>
 
       <!-- Model Predictive Control -->
-      <a href="https://zhuanlan.zhihu.com/p/99307739" target="_blank" class="block outline-none">
+      <a href="https://zhuanlan.zhihu.com/p/99307739" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">OPTIMAL CONTROL</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">模型预测控制 (MPC) 原理与应用</div>
@@ -69,7 +69,7 @@
       </a>
 
       <!-- LQR -->
-      <a href="https://zhuanlan.zhihu.com/p/138920945" target="_blank" class="block outline-none">
+      <a href="https://zhuanlan.zhihu.com/p/138920945" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">OPTIMAL CONTROL</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">LQR 线性二次型调节器快速入门</div>
@@ -82,7 +82,7 @@
       </a>
 
       <!-- Extented Kalman Filter -->
-      <a href="https://blog.csdn.net/weixin_44633882/article/details/115454645" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/weixin_44633882/article/details/115454645" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">NONLINEAR SYSTEM</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">扩展卡尔曼滤波 (EKF) 与泰勒展开</div>
@@ -95,7 +95,7 @@
       </a>
 
       <!-- Adaptive Control -->
-      <a href="https://zhuanlan.zhihu.com/p/354512967" target="_blank" class="block outline-none">
+      <a href="https://zhuanlan.zhihu.com/p/354512967" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">ADAPTIVE CONTROL</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">模型参考自适应控制 (MRAC) 原理</div>
@@ -108,7 +108,7 @@
       </a>
 
       <!-- Adaptive Kalman Filter -->
-      <a href="https://blog.csdn.net/weixin_41197108/article/details/116224563" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/weixin_41197108/article/details/116224563" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">ADVANCED ESTIMATION</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">自适应卡尔曼滤波入门</div>
@@ -121,7 +121,7 @@
       </a>
 
       <!-- Schmitt Trigger -->
-      <a href="https://blog.csdn.net/Quarx/article/details/103811089" target="_blank" class="block outline-none">
+      <a href="https://blog.csdn.net/Quarx/article/details/103811089" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">ENGINEERING TRICKS</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2 group-hover:text-[var(--accent-color)] transition-colors">施密特触发器的抗抖与迟滞原理</div>

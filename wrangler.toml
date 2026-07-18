@@ -1,0 +1,14 @@
+name = "my-website"
+compatibility_date = "2026-07-02"
+pages_build_output_dir = "dist"
+
+[[durable_objects.bindings]]
+name = "LIKE_COUNTER"
+class_name = "LikeCounter"
+script_name = "my-website-like-counter"
+
+# Optional rollout helper: keep your old KV binding named LIKES_KV during the
+# first deployment if you want the Durable Object to import the previous count.
+# [[kv_namespaces]]
+# binding = "LIKES_KV"
+# id = "your-existing-kv-namespace-id"

@@ -14,7 +14,7 @@
         type="button"
         @click="openMotor"
         @keydown.enter.prevent="openMotor"
-        class="block outline-none text-left"
+        class="block w-full h-full outline-none text-left"
       >
         <BentoCard :pulse="activePulse === 'motor'">
         <div class="flex items-center gap-3 mb-4">
@@ -42,7 +42,7 @@
         type="button"
         @click="openAckermann"
         @keydown.enter.prevent="openAckermann"
-        class="block outline-none text-left"
+        class="block w-full h-full outline-none text-left"
       >
         <BentoCard :pulse="activePulse === 'ackermann'">
           <div class="flex items-center gap-3 mb-4">
@@ -72,7 +72,7 @@
         type="button"
         @click="openDevBoard"
         @keydown.enter.prevent="openDevBoard"
-        class="block outline-none text-left"
+        class="block w-full h-full outline-none text-left"
       >
         <BentoCard :pulse="activePulse === 'devboard'">
           <div class="flex items-center gap-3 mb-4">
@@ -95,7 +95,13 @@
       </button>
 
       <!-- 项目4: 肌电灵巧手 (重点) -->
-      <BentoCard>
+      <button
+        type="button"
+        @click="openMyoHand"
+        @keydown.enter.prevent="openMyoHand"
+        class="block w-full h-full outline-none text-left"
+      >
+      <BentoCard :pulse="activePulse === 'myohand'" class="h-full">
         <div class="flex items-center gap-3 mb-4">
           <div class="w-10 h-10 rounded-xl bg-purple-500/15 text-purple-600 flex items-center justify-center font-bold text-sm">P4</div>
           <div>
@@ -110,7 +116,9 @@
           <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">卡尔曼滤波</span>
           <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-bg)] text-[var(--accent-color)] font-medium">ONNX</span>
         </div>
+        <div class="mt-4 text-[11px] font-bold text-[var(--accent-color)] tracking-wide">查看详情 →</div>
       </BentoCard>
+      </button>
     </div>
   </div>
 </template>
@@ -123,7 +131,7 @@ const emit = defineEmits<{
   (e: 'open', page: string): void
 }>()
 
-type ProjectPulse = 'motor' | 'ackermann' | 'devboard' | null
+type ProjectPulse = 'motor' | 'ackermann' | 'devboard' | 'myohand' | null
 const activePulse = ref<ProjectPulse>(null)
 let openTimer: ReturnType<typeof setTimeout> | null = null
 const CARD_OPEN_DELAY = 180
@@ -150,6 +158,10 @@ const openAckermann = () => {
 
 const openDevBoard = () => {
   openWithPulse('devboard', 'project_devboard')
+}
+
+const openMyoHand = () => {
+  openWithPulse('myohand', 'project_myohand')
 }
 
 onUnmounted(() => {

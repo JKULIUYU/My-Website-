@@ -52,7 +52,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <a href="https://www.bilibili.com/video/BV1w7421f7ZJ/" target="_blank" class="block outline-none">
+      <a href="https://www.bilibili.com/video/BV1w7421f7ZJ/" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">MCU / HAL</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2">STM32 HAL 库系统教程</div>
@@ -64,7 +64,7 @@
         </BentoCard>
       </a>
 
-      <a href="https://www.bilibili.com/video/BV1vUpje9Ej2/" target="_blank" class="block outline-none">
+      <a href="https://www.bilibili.com/video/BV1vUpje9Ej2/" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">RTOS</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2">FreeRTOS 入门与实战</div>
@@ -76,7 +76,7 @@
         </BentoCard>
       </a>
 
-      <a href="https://space.bilibili.com/346179450" target="_blank" class="block outline-none">
+      <a href="https://space.bilibili.com/346179450" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">PCB DESIGN</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2">Expert 电子实验室：PCB 入门与大师篇</div>
@@ -88,7 +88,7 @@
         </BentoCard>
       </a>
 
-      <a href="https://www.bilibili.com/video/BV1fFAfeZEBE/" target="_blank" class="block outline-none">
+      <a href="https://www.bilibili.com/video/BV1fFAfeZEBE/" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">POWER</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2">PCB 进阶与电源设计实战</div>

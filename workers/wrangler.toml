@@ -1,0 +1,11 @@
+name = "my-website-like-counter"
+main = "like-counter.ts"
+compatibility_date = "2026-07-02"
+
+[[durable_objects.bindings]]
+name = "LIKE_COUNTER"
+class_name = "LikeCounter"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["LikeCounter"]

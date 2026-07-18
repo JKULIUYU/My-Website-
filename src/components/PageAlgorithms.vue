@@ -65,7 +65,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <a href="https://space.bilibili.com/8888480" target="_blank" class="block outline-none">
+      <a href="https://space.bilibili.com/8888480" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">FOUNDATION</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2">左程云：算法与数据结构</div>
@@ -77,7 +77,7 @@
         </BentoCard>
       </a>
 
-      <a href="https://space.bilibili.com/231911980" target="_blank" class="block outline-none">
+      <a href="https://space.bilibili.com/231911980" target="_blank" rel="noopener noreferrer" class="block outline-none">
         <BentoCard class="h-full hover:-translate-y-1 transition-transform duration-300">
           <div class="text-[10px] text-[var(--accent-color)] font-bold tracking-wider mb-2">FOUNDATION</div>
           <div class="font-bold text-sm text-[var(--text-main)] mb-2">Erikse：算法与数据结构</div>
